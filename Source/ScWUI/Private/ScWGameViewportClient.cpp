@@ -2,9 +2,6 @@
 
 #include "ScWGameViewportClient.h"
 
-#include "CommonUISettings.h"
-#include "ICommonUIModule.h"
-
 #include UE_INLINE_GENERATED_CPP_BY_NAME(ScWGameViewportClient)
 
 class UGameInstance;

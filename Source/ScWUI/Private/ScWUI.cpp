@@ -2,6 +2,8 @@
 
 #include "ScWUI.h"
 
+#include "Modules/ModuleManager.h"
+
 #define LOCTEXT_NAMESPACE "FScWUIModule"
 
 void FScWUIModule::StartupModule() // IModuleInterface

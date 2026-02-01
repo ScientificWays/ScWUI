@@ -2,15 +2,15 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
-#include "CommonActionWidget.h"
+#include "ScWUI.h"
+
 #include "ScWActionWidget.generated.h"
 
 /**
  * 
  */
-UCLASS()
-class SCWUI_API UScWActionWidget : public UCommonActionWidget
+UCLASS(MinimalAPI)
+class UScWActionWidget : public UCommonActionWidget
 {
 	GENERATED_BODY()
 
@@ -21,6 +21,6 @@ public:
 public:
 	
 	UFUNCTION(Category = "CommonActionWidget", BlueprintCallable)
-	void SetDesignTimeKey(const FKey& InKey);
+	MODULE_API void SetDesignTimeKey(const FKey& InKey);
 //~ Editor
 };

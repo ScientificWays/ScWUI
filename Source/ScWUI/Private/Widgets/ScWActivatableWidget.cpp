@@ -2,8 +2,6 @@
 
 #include "Widgets/ScWActivatableWidget.h"
 
-#include "Editor/WidgetCompilerLog.h"
-
 #include UE_INLINE_GENERATED_CPP_BY_NAME(ScWActivatableWidget)
 
 #define LOCTEXT_NAMESPACE "ScW"

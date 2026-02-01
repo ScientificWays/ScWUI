@@ -16,11 +16,16 @@ public class ScWUI : ModuleRules
 		PublicDependencyModuleNames.AddRange(new string[]
 		{
 			"Core",
-			"EngineSettings",
+            "CoreUObject",
+
+            "EngineSettings",
+
+			"Slate",
+			"SlateCore",
 
 			"UMG",
 			"CommonUI",
-			"SlateCore",
+			"CommonInput",
 
 			"InputCore",
 			"EnhancedInput",
@@ -31,7 +36,7 @@ public class ScWUI : ModuleRules
 		PrivateDependencyModuleNames.AddRange(new string[]
 		{
 			"Engine",
-			"CoreUObject",
+			"ApplicationCore",
 		});
 	}
 }

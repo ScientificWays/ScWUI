@@ -2,12 +2,12 @@
 
 #pragma once
 
-#include "CommonGameViewportClient.h"
+#include "ScWUI.h"
 
 #include "ScWGameViewportClient.generated.h"
 
-UCLASS(BlueprintType, meta = (DisplayName = "[ScW] Game Viewport Client"))
-class SCWUI_API UScWGameViewportClient : public UCommonGameViewportClient
+UCLASS(MinimalAPI, BlueprintType, meta = (DisplayName = "[ScW] Game Viewport Client"))
+class UScWGameViewportClient : public UCommonGameViewportClient
 {
 	GENERATED_BODY()
 
