@@ -7,7 +7,7 @@
 #include "ScWGameViewportClient.generated.h"
 
 UCLASS(BlueprintType, meta = (DisplayName = "[ScW] Game Viewport Client"))
-class UScWGameViewportClient : public UCommonGameViewportClient
+class SCWUI_API UScWGameViewportClient : public UCommonGameViewportClient
 {
 	GENERATED_BODY()
 

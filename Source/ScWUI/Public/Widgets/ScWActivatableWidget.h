@@ -17,7 +17,7 @@ enum class EScWWidgetInputMode : uint8
 
 // An activatable widget that automatically drives the desired input config when activated
 UCLASS(Abstract, Blueprintable, meta = (DisplayName = "[ScW] Activatable Widget"))
-class UScWActivatableWidget : public UCommonActivatableWidget
+class SCWUI_API UScWActivatableWidget : public UCommonActivatableWidget
 {
 	GENERATED_BODY()
 
