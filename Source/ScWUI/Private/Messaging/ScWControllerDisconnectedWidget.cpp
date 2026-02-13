@@ -2,14 +2,12 @@
 
 #include "Messaging/ScWControllerDisconnectedWidget.h"
 
-#include "ScWUILogChannels.h"
-
 #include UE_INLINE_GENERATED_CPP_BY_NAME(ScWControllerDisconnectedWidget)
 
 UE_DEFINE_GAMEPLAY_TAG_STATIC(TAG_Platform_Trait_Input_HasStrictControllerPairing, "Platform.Trait.Input.HasStrictControllerPairing");
 
-UScWControllerDisconnectedWidget::UScWControllerDisconnectedWidget(const FObjectInitializer& ObjectInitializer)
-	: Super(ObjectInitializer)
+UScWControllerDisconnectedWidget::UScWControllerDisconnectedWidget(const FObjectInitializer& InObjectInitializer)
+	: Super(InObjectInitializer)
 {
 	// By default, only strict pairing platforms will need this button.
 	PlatformSupportsUserChangeTags.AddTag(TAG_Platform_Trait_Input_HasStrictControllerPairing);

@@ -16,27 +16,40 @@ public class ScWUI : ModuleRules
 		PublicDependencyModuleNames.AddRange(new string[]
 		{
 			"Core",
-            "CoreUObject",
+			"CoreUObject",
 
-            "EngineSettings",
+			"EngineSettings",
 
 			"Slate",
 			"SlateCore",
-
-			"UMG",
-			"CommonUI",
-			"CommonInput",
 
 			"InputCore",
 			"EnhancedInput",
 
 			"GameplayTags",
+			"GameFeatures",
+			"ModularGameplay",
+
+			"UMG",
+			"CommonUI",
+			"CommonGame",
+			"CommonInput",
+			"PropertyPath",
+			"PreLoadScreen",
+
+			"UIExtension",
+			"ScWGameCore",
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[]
 		{
 			"Engine",
+			"RenderCore",
 			"ApplicationCore",
+			"DeveloperSettings",
+
+			"CommonUser",
+			"GameSettings",
 		});
 	}
 }

@@ -64,13 +64,13 @@ protected:
 	* Pushes the ControllerDisconnectedMenuClass to the Menu layer (UI.Layer.Menu)
 	*/
 	UFUNCTION(BlueprintNativeEvent, Category = "Controller Disconnect Menu")
-	MODULE_API void DisplayControllerDisconnectedMenu();
+	SCWUI_API void DisplayControllerDisconnectedMenu();
 
 	/**
 	* Hides the controller disconnected menu if it is active.
 	*/
 	UFUNCTION(BlueprintNativeEvent, Category = "Controller Disconnect Menu")
-	MODULE_API void HideControllerDisconnectedMenu();
+	SCWUI_API void HideControllerDisconnectedMenu();
 	
 	/**
 	 * The menu to be displayed when the user presses the "Pause" or "Escape" button 

@@ -2,7 +2,7 @@
 	"FileVersion": 3,
 	"Version": 1,
 	"VersionName": "1.0",
-	"FriendlyName": "ScW UI Framework",
+	"FriendlyName": "[ScW] UI Framework",
 	"Description": "Scientific Ways UI framework plugin.",
 	"Category": "Other",
 	"CreatedBy": "zanayn",
@@ -10,7 +10,7 @@
 	"DocsURL": "",
 	"MarketplaceURL": "",
 	"SupportURL": "",
-	"CanContainContent": true,
+	"CanContainContent": false,
 	"IsBetaVersion": false,
 	"IsExperimentalVersion": false,
 	"Installed": false,
@@ -19,12 +19,21 @@
 			"Name": "ScWUI",
 			"Type": "Runtime",
 			"LoadingPhase": "Default"
+		},
+		{
+			"Name": "UIExtension",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
 		}
 	],
 	"Precompiled": true,
 	"Plugins": [
 		{
 			"Name": "CommonUI",
+			"Enabled": true
+		},
+		{
+			"Name": "ScWGameCore",
 			"Enabled": true
 		}
 	]

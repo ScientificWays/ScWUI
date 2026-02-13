@@ -2,6 +2,7 @@
 	"BuildId": "43139311",
 	"Modules": 
 	{
-		"ScWUI": "UnrealEditor-ScWUI.dll"
+		"ScWUI": "UnrealEditor-ScWUI.dll",
+		"UIExtension": "UnrealEditor-UIExtension.dll"
 	}
 }

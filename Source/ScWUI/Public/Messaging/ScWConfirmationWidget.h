@@ -4,24 +4,24 @@
 
 #include "ScWUI.h"
 
-#include "Messaging/ScWGameDialog.h"
+#include "Messaging/CommonGameDialog.h"
 
 #include "ScWConfirmationWidget.generated.h"
 
 /**
  *	
  */
-UCLASS(Abstract, BlueprintType, Blueprintable)
-class UScWConfirmationWidget : public UScWGameDialog
+UCLASS(MinimalAPI, Abstract, BlueprintType, Blueprintable)
+class UScWConfirmationWidget : public UCommonGameDialog
 {
 	GENERATED_BODY()
 public:
-	virtual void SetupDialog(UScWGameDialogDescriptor* InDescriptor, FCommonMessagingResultDelegate InResultCallback) override;
+	virtual void SetupDialog(UCommonGameDialogDescriptor* InDescriptor, FCommonMessagingResultDelegate InResultCallback) override;
 	virtual void KillDialog() override;
 
 protected:
 	virtual void NativeOnInitialized() override; // UUserWidget
-	virtual void CloseConfirmationWindow(EScWMessagingResult InResult);
+	virtual void CloseConfirmationWindow(ECommonMessagingResult InResult);
 
 #if WITH_EDITOR
 	virtual void ValidateCompiledDefaults(IWidgetCompilerLog& InCompileLog) const override;

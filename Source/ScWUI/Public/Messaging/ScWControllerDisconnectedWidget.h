@@ -15,12 +15,12 @@ struct FPlatformUserSelectionCompleteParams;
  * A screen to display when the user has had all of their controllers disconnected and needs to
  * re-connect them to continue playing the game.
  */
-UCLASS(Abstract, BlueprintType, Blueprintable)
+UCLASS(MinimalAPI, Abstract, BlueprintType, Blueprintable)
 class UScWControllerDisconnectedWidget : public UCommonActivatableWidget
 {
 	GENERATED_BODY()
 public:
-	UScWControllerDisconnectedWidget(const FObjectInitializer& ObjectInitializer);
+	UScWControllerDisconnectedWidget(const FObjectInitializer& InObjectInitializer);
 	
 protected:
 	virtual void NativeOnActivated() override;

@@ -24,7 +24,7 @@
 #include "GameplayTagContainer.h"
 
 #include "Blueprint/UserWidget.h"
-#include "Input/CommonUIInputTypes.h"
+#include "EnhancedInputSubsystemInterface.h"
 
 #include "GameFramework/InputSettings.h"
 #include "GameFramework/InputDeviceSubsystem.h"
@@ -34,6 +34,7 @@
 
 #include "Components/HorizontalBox.h"
 #include "Components/DynamicEntryBox.h"
+#include "Components/GameFrameworkComponentManager.h"
 
 #include "ICommonUIModule.h"
 #include "ICommonInputModule.h"
@@ -48,6 +49,7 @@
 #include "CommonInputSubsystem.h"
 #include "CommonActivatableWidget.h"
 #include "CommonGameViewportClient.h"
+#include "Input/CommonUIInputTypes.h"
 #include "Widgets/CommonActivatableWidgetContainer.h"
 
 #include "Containers/Ticker.h"
@@ -60,7 +62,9 @@
 	#include "CommonUIVisibilitySubsystem.h"
 #endif	// WITH_EDITOR
 
-#define MODULE_API SCWUI_API
+#include "Utils/ScWUtils.h"
+
+DECLARE_LOG_CATEGORY_EXTERN(LogScWUI, Log, All);
 
 class FScWUIModule : public IModuleInterface
 {

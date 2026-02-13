@@ -14,7 +14,7 @@ class UScWButtonBase : public UCommonButtonBase
 public:
 
 	UFUNCTION(BlueprintCallable)
-	MODULE_API void SetButtonText(const FText& InText);
+	SCWUI_API void SetButtonText(const FText& InText);
 	
 protected:
 	virtual void NativePreConstruct() override; // UUserWidget
@@ -24,15 +24,15 @@ protected:
 	void RefreshButtonText();
 	
 	UFUNCTION(BlueprintImplementableEvent)
-	MODULE_API void UpdateButtonText(const FText& InText);
+	SCWUI_API void UpdateButtonText(const FText& InText);
 
 	UFUNCTION(BlueprintImplementableEvent)
-	MODULE_API void UpdateButtonStyle();
+	SCWUI_API void UpdateButtonStyle();
 	
 private:
-	UPROPERTY(EditAnywhere, Category="Button", meta=(InlineEditConditionToggle))
+	UPROPERTY(EditAnywhere, Category="Button", meta = (InlineEditConditionToggle))
 	uint8 bOverride_ButtonText : 1;
 	
-	UPROPERTY(EditAnywhere, Category="Button", meta=( editcondition="bOverride_ButtonText" ))
+	UPROPERTY(EditAnywhere, Category="Button", meta = ( editcondition="bOverride_ButtonText" ))
 	FText ButtonText;
 };

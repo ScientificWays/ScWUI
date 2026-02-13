@@ -6,7 +6,7 @@
 
 #include UE_INLINE_GENERATED_CPP_BY_NAME(ScWConfirmationWidget)
 
-void UScWConfirmationWidget::SetupDialog(UScWGameDialogDescriptor* InDescriptor, FCommonMessagingResultDelegate InResultCallback)
+void UScWConfirmationWidget::SetupDialog(UCommonGameDialogDescriptor* InDescriptor, FCommonMessagingResultDelegate InResultCallback)
 {
 	Super::SetupDialog(InDescriptor, InResultCallback);
 
@@ -17,19 +17,19 @@ void UScWConfirmationWidget::SetupDialog(UScWGameDialogDescriptor* InDescriptor,
 	{
 		InButton.OnClicked().Clear();
 	});
-	for (const FScWConfirmationDialogAction& Action : InDescriptor->ButtonActions)
+	for (const FConfirmationDialogAction& Action : InDescriptor->ButtonActions)
 	{
 		FDataTableRowHandle ActionRow;
 
 		switch(Action.Result)
 		{
-			case EScWMessagingResult::Confirmed:
+			case ECommonMessagingResult::Confirmed:
 				ActionRow = ICommonInputModule::GetSettings().GetDefaultClickAction();
 				break;
-			case EScWMessagingResult::Declined:
+			case ECommonMessagingResult::Declined:
 				ActionRow = ICommonInputModule::GetSettings().GetDefaultBackAction();
 				break;
-			case EScWMessagingResult::Cancelled:
+			case ECommonMessagingResult::Cancelled:
 				ActionRow = CancelAction;
 				break;
 			default:
@@ -55,7 +55,7 @@ void UScWConfirmationWidget::NativeOnInitialized()
 	Border_TapToCloseZone->OnMouseButtonDownEvent.BindDynamic(this, &UScWConfirmationWidget::HandleTapToCloseZoneMouseButtonDown);
 }
 
-void UScWConfirmationWidget::CloseConfirmationWindow(EScWMessagingResult InResult)
+void UScWConfirmationWidget::CloseConfirmationWindow(ECommonMessagingResult InResult)
 {
 	DeactivateWidget();
 	OnResultCallback.ExecuteIfBound(InResult);
@@ -68,7 +68,7 @@ FEventReply UScWConfirmationWidget::HandleTapToCloseZoneMouseButtonDown(FGeometr
 
 	if (InMouseEvent.IsTouchEvent() || InMouseEvent.GetEffectingButton() == EKeys::LeftMouseButton)
 	{
-		CloseConfirmationWindow(EScWMessagingResult::Declined);
+		CloseConfirmationWindow(ECommonMessagingResult::Declined);
 		Reply.NativeReply = FReply::Handled();
 	}
 	return Reply;

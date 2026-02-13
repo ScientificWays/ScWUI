@@ -21,6 +21,6 @@ public:
 public:
 	
 	UFUNCTION(Category = "CommonActionWidget", BlueprintCallable)
-	MODULE_API void SetDesignTimeKey(const FKey& InKey);
+	SCWUI_API void SetDesignTimeKey(const FKey& InKey);
 //~ Editor
 };

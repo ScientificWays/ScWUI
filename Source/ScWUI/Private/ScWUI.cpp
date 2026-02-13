@@ -6,6 +6,8 @@
 
 #define LOCTEXT_NAMESPACE "FScWUIModule"
 
+DEFINE_LOG_CATEGORY(LogScWUI);
+
 void FScWUIModule::StartupModule() // IModuleInterface
 {
 	// This code will execute after your module is loaded into memory; the exact timing is specified in the .uplugin file per-module

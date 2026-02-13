@@ -2,7 +2,8 @@
 
 #include "Game/ScWHUDLayout.h"
 
-#include "ScWUILogChannels.h"
+#include "CommonUIExtensions.h"
+
 #include "Messaging/ScWControllerDisconnectedWidget.h"
 
 #include UE_INLINE_GENERATED_CPP_BY_NAME(ScWHUDLayout)
@@ -55,7 +56,7 @@ void UScWHUDLayout::HandleEscapeAction()
 {
 	if (ensure(!EscapeMenuClass.IsNull()))
 	{
-		UScWUIFunctionLibrary::PushStreamedContentToLayer_ForPlayer(GetOwningLocalPlayer(), TAG_UI_LAYER_MENU, EscapeMenuClass);
+		UCommonUIExtensions::PushStreamedContentToLayer_ForPlayer(GetOwningLocalPlayer(), TAG_UI_LAYER_MENU, EscapeMenuClass);
 	}
 }
 
@@ -163,7 +164,7 @@ void UScWHUDLayout::DisplayControllerDisconnectedMenu_Implementation()
 	if (ControllerDisconnectedScreen)
 	{
 		// Push the "controller disconnected" widget to the menu layer
-		SpawnedControllerDisconnectedWidget = UScWUIFunctionLibrary::PushContentToLayer_ForPlayer(GetOwningLocalPlayer(), TAG_UI_LAYER_MENU, ControllerDisconnectedScreen);
+		SpawnedControllerDisconnectedWidget = UCommonUIExtensions::PushContentToLayer_ForPlayer(GetOwningLocalPlayer(), TAG_UI_LAYER_MENU, ControllerDisconnectedScreen);
 	}
 }
 
@@ -171,6 +172,6 @@ void UScWHUDLayout::HideControllerDisconnectedMenu_Implementation()
 {
 	UE_LOG(LogScWUI, Log, TEXT("[%hs] Hide controller disconnected menu!"), __FUNCTION__);
 	
-	UScWUIFunctionLibrary::PopContentFromLayer(SpawnedControllerDisconnectedWidget);
+	UCommonUIExtensions::PopContentFromLayer(SpawnedControllerDisconnectedWidget);
 	SpawnedControllerDisconnectedWidget = nullptr;
 }
