@@ -4,27 +4,25 @@
 
 #include "CommonUIExtensions.h"
 
+#include "Tags/ScWUITags.h"
+
 #include "Messaging/ScWControllerDisconnectedWidget.h"
 
 #include UE_INLINE_GENERATED_CPP_BY_NAME(ScWHUDLayout)
-
-UE_DEFINE_GAMEPLAY_TAG_STATIC(TAG_UI_LAYER_MENU, "UI.Layer.Menu");
-UE_DEFINE_GAMEPLAY_TAG_STATIC(TAG_UI_ACTION_ESCAPE, "UI.Action.Escape");
-UE_DEFINE_GAMEPLAY_TAG_STATIC(TAG_Platform_Trait_Input_PrimaryController, "Platform.Trait.Input.PrimaryController");
 
 UScWHUDLayout::UScWHUDLayout(const FObjectInitializer& InObjectInitializer)
 	: Super(InObjectInitializer)
 	, SpawnedControllerDisconnectedWidget(nullptr)
 {
 	// By default, only primary controller platforms require a disconnect screen. 
-	PlatformRequiresControllerDisconnectedWidget.AddTag(TAG_Platform_Trait_Input_PrimaryController);
+	PlatformRequiresControllerDisconnectedWidget.AddTag(FScWUITags::Platform_Trait_Input_PrimaryController);
 }
 
 void UScWHUDLayout::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
 
-	RegisterUIActionBinding(FBindUIActionArgs(FUIActionTag::ConvertChecked(TAG_UI_ACTION_ESCAPE), false, FSimpleDelegate::CreateUObject(this, &ThisClass::HandleEscapeAction)));
+	RegisterUIActionBinding(FBindUIActionArgs(FUIActionTag::ConvertChecked(FScWUITags::UI_Action_Escape), false, FSimpleDelegate::CreateUObject(this, &ThisClass::HandleEscapeAction)));
 
 	// If we can display a controller disconnect screen, then listen for the controller state change delegates
 	if (ShouldPlatformDisplayControllerDisconnectedWidget())
@@ -56,7 +54,7 @@ void UScWHUDLayout::HandleEscapeAction()
 {
 	if (ensure(!EscapeMenuClass.IsNull()))
 	{
-		UCommonUIExtensions::PushStreamedContentToLayer_ForPlayer(GetOwningLocalPlayer(), TAG_UI_LAYER_MENU, EscapeMenuClass);
+		UCommonUIExtensions::PushStreamedContentToLayer_ForPlayer(GetOwningLocalPlayer(), FScWUITags::UI_Layer_Menu, EscapeMenuClass);
 	}
 }
 
@@ -164,7 +162,7 @@ void UScWHUDLayout::DisplayControllerDisconnectedMenu_Implementation()
 	if (ControllerDisconnectedScreen)
 	{
 		// Push the "controller disconnected" widget to the menu layer
-		SpawnedControllerDisconnectedWidget = UCommonUIExtensions::PushContentToLayer_ForPlayer(GetOwningLocalPlayer(), TAG_UI_LAYER_MENU, ControllerDisconnectedScreen);
+		SpawnedControllerDisconnectedWidget = UCommonUIExtensions::PushContentToLayer_ForPlayer(GetOwningLocalPlayer(), FScWUITags::UI_Layer_Menu, ControllerDisconnectedScreen);
 	}
 }
 

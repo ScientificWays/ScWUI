@@ -4,16 +4,9 @@
 
 #include "ScWUI.h"
 
-#include "ScWActivatableWidget.generated.h"
+#include "Input/UIActionBindingHandle.h"
 
-UENUM(BlueprintType, meta = (DisplayName = "[ScW] Widget Input Mode"))
-enum class EScWWidgetInputMode : uint8
-{
-	Default,
-	GameAndMenu,
-	Game,
-	Menu
-};
+#include "ScWActivatableWidget.generated.h"
 
 // An activatable widget that automatically drives the desired input config when activated
 UCLASS(MinimalAPI, Abstract, Blueprintable, meta = (DisplayName = "[ScW] Activatable Widget"))
@@ -25,46 +18,29 @@ class UScWActivatableWidget : public UCommonActivatableWidget
 public:
 	UScWActivatableWidget(const FObjectInitializer& InObjectInitializer);
 protected:
-	virtual void NativePreConstruct() override; // UUserWidget
-	virtual void NativeDestruct() override; // UUserWidget
-
-	/** The desired input mode to use while this UI is activated, for example do you want key presses to still reach the game/player controller? */
-	UPROPERTY(EditDefaultsOnly, Category = Input)
-	EScWWidgetInputMode InputConfig = EScWWidgetInputMode::Default;
-
-	/** The desired mouse behavior when the game gets input. */
-	UPROPERTY(EditDefaultsOnly, Category = Input)
-	EMouseCaptureMode GameMouseCaptureMode = EMouseCaptureMode::CapturePermanently;
+	virtual void NativeOnActivated() override; // UCommonActivatableWidget
+	virtual void NativeOnDeactivated() override; // UCommonActivatableWidget
 public:
-	virtual TOptional<struct FUIInputConfig> GetDesiredInputConfig() const override; // UCommonActivatableWidget
 #if WITH_EDITOR
 	virtual void ValidateCompiledWidgetTree(const UWidgetTree& InBlueprintWidgetTree, class IWidgetCompilerLog& InCompilerLog) const override; // UserWidget
 #endif
 
-	UFUNCTION(Category = "Initialize", BlueprintCallable, BlueprintNativeEvent, meta = (DisplayName = "Remove Animated"))
-	void BP_RemoveAnimated();
+	UFUNCTION(Category = "Initialize", BlueprintCallable)
+	void RemoveAnimated();
+
+	UFUNCTION(Category = "Initialize", BlueprintNativeEvent, meta = (DisplayName = "Remove Animated"))
+	void BP_HandleRemoveAnimated();
 //~ End Initialize
 	
 //~ Begin Input
 public:
+	virtual TOptional<struct FUIInputConfig> GetDesiredInputConfig() const override; // UCommonActivatableWidget
 
 	UPROPERTY(Category = "Input", EditAnywhere, BlueprintReadOnly)
-	TObjectPtr<UInputMappingContext> InputMappingContext;
+	bool bUseCustomInputConfig;
 
-	UPROPERTY(Category = "Input", EditAnywhere, BlueprintReadOnly)
-	int32 InputMappingContextPriority;
-
-	UPROPERTY(Category = "Input", EditAnywhere, BlueprintReadOnly)
-	FModifyContextOptions InputMappingContextOptions;
-
-	UPROPERTY(Category = "Input", EditAnywhere, BlueprintReadOnly)
-	bool bShouldShowMouseCursor;
-
-	UPROPERTY(Category = "Input", EditAnywhere, BlueprintReadOnly)
-	bool bShouldBlockMovementInput;
-
-	UPROPERTY(Category = "Input", EditAnywhere, BlueprintReadOnly)
-	bool bShouldBlockLookInput;
+	UPROPERTY(Category = "Input", EditAnywhere, BlueprintReadOnly, meta = (EditCondition = "bUseCustomInputConfig"))
+	FUIInputConfig CustomInputConfig;
 //~ End Input
 	
 //~ Begin Game
@@ -72,5 +48,8 @@ public:
 
 	UPROPERTY(Category = "Game", EditAnywhere, BlueprintReadOnly)
 	bool bShouldPauseGame;
+
+	UPROPERTY(Category = "Game", EditAnywhere, BlueprintReadOnly)
+	bool bUnpauseOnRemovingAnimated;
 //~ End Game
 };

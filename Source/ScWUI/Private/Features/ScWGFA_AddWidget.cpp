@@ -46,7 +46,6 @@ void UScWGFA_AddWidgets::AddAdditionalAssetBundleData(FAssetBundleData& AssetBun
 EDataValidationResult UScWGFA_AddWidgets::IsDataValid(FDataValidationContext& Context) const
 {
 	EDataValidationResult Result = CombineDataValidationResults(Super::IsDataValid(Context), EDataValidationResult::Valid);
-
 	{
 		int32 EntryIndex = 0;
 		for (const FScWHUDLayoutRequest& Entry : Layout)
@@ -56,17 +55,14 @@ EDataValidationResult UScWGFA_AddWidgets::IsDataValid(FDataValidationContext& Co
 				Result = EDataValidationResult::Invalid;
 				Context.AddError(FText::Format(LOCTEXT("LayoutHasNullClass", "Null WidgetClass at index {0} in Layout"), FText::AsNumber(EntryIndex)));
 			}
-
-			if (!Entry.LayerID.IsValid())
+			if (!Entry.LayerTag.IsValid())
 			{
 				Result = EDataValidationResult::Invalid;
-				Context.AddError(FText::Format(LOCTEXT("LayoutHasNoTag", "LayerID is not set at index {0} in Widgets"), FText::AsNumber(EntryIndex)));
+				Context.AddError(FText::Format(LOCTEXT("LayoutHasNoTag", "LayerTag is not set at index {0} in Widgets"), FText::AsNumber(EntryIndex)));
 			}
-
 			++EntryIndex;
 		}
 	}
-
 	{
 		int32 EntryIndex = 0;
 		for (const FScWHUDElementEntry& Entry : Widgets)
@@ -76,16 +72,14 @@ EDataValidationResult UScWGFA_AddWidgets::IsDataValid(FDataValidationContext& Co
 				Result = EDataValidationResult::Invalid;
 				Context.AddError(FText::Format(LOCTEXT("EntryHasNullClass", "Null WidgetClass at index {0} in Widgets"), FText::AsNumber(EntryIndex)));
 			}
-
-			if (!Entry.SlotID.IsValid())
+			if (!Entry.ExtensionTag.IsValid())
 			{
 				Result = EDataValidationResult::Invalid;
-				Context.AddError(FText::Format(LOCTEXT("EntryHasNoTag", "SlotID is not set at index {0} in Widgets"), FText::AsNumber(EntryIndex)));
+				Context.AddError(FText::Format(LOCTEXT("EntryHasNoTag", "ExtensionTag is not set at index {0} in Widgets"), FText::AsNumber(EntryIndex)));
 			}
 			++EntryIndex;
 		}
 	}
-
 	return Result;
 }
 #endif
@@ -127,6 +121,7 @@ void UScWGFA_AddWidgets::Reset(FPerContextData& ActiveData)
 void UScWGFA_AddWidgets::HandleActorExtension(AActor* Actor, FName EventName, FGameFeatureStateChangeContext ChangeContext)
 {
 	FPerContextData& ActiveData = ContextData.FindOrAdd(ChangeContext);
+
 	if ((EventName == UGameFrameworkComponentManager::NAME_ExtensionRemoved) || (EventName == UGameFrameworkComponentManager::NAME_ReceiverRemoved))
 	{
 		RemoveWidgets(Actor, ActiveData);
@@ -145,7 +140,6 @@ void UScWGFA_AddWidgets::AddWidgets(AActor* Actor, FPerContextData& ActiveData)
 	{
 		return;
 	}
-
 	if (ULocalPlayer* LocalPlayer = Cast<ULocalPlayer>(HUD->GetOwningPlayerController()->Player))
 	{
 		FPerActorData& ActorData = ActiveData.ActorData.FindOrAdd(HUD);
@@ -154,14 +148,13 @@ void UScWGFA_AddWidgets::AddWidgets(AActor* Actor, FPerContextData& ActiveData)
 		{
 			if (TSubclassOf<UCommonActivatableWidget> ConcreteWidgetClass = Entry.LayoutClass.Get())
 			{
-				ActorData.LayoutsAdded.Add(UCommonUIExtensions::PushContentToLayer_ForPlayer(LocalPlayer, Entry.LayerID, ConcreteWidgetClass));
+				ActorData.LayoutsAdded.Add(UCommonUIExtensions::PushContentToLayer_ForPlayer(LocalPlayer, Entry.LayerTag, ConcreteWidgetClass));
 			}
 		}
-
 		UUIExtensionSubsystem* ExtensionSubsystem = HUD->GetWorld()->GetSubsystem<UUIExtensionSubsystem>();
 		for (const FScWHUDElementEntry& Entry : Widgets)
 		{
-			ActorData.ExtensionHandles.Add(ExtensionSubsystem->RegisterExtensionAsWidgetForContext(Entry.SlotID, LocalPlayer, Entry.WidgetClass.Get(), -1));
+			ActorData.ExtensionHandles.Add(ExtensionSubsystem->RegisterExtensionAsWidgetForContext(Entry.ExtensionTag, LocalPlayer, Entry.WidgetClass.Get(), -1));
 		}
 	}
 }
@@ -182,7 +175,6 @@ void UScWGFA_AddWidgets::RemoveWidgets(AActor* Actor, FPerContextData& ActiveDat
 				AddedLayout->DeactivateWidget();
 			}
 		}
-
 		for (FUIExtensionHandle& Handle : ActorData->ExtensionHandles)
 		{
 			Handle.Unregister();

@@ -13,7 +13,7 @@ class UScWControllerDisconnectedWidget;
 /**
  *	Widget used to lay out the player's HUD (typically specified by an Add Widgets action in the experience)
  */
-UCLASS(MinimalAPI, Abstract, BlueprintType, Blueprintable, meta = (DisplayName = "[ScW] HUD Widget", Category = "ScW | HUD"))
+UCLASS(MinimalAPI, Abstract, BlueprintType, Blueprintable, meta = (DisplayName = "[ScW] HUD Layout", Category = "ScW | HUD"))
 class UScWHUDLayout : public UScWActivatableWidget
 {
 	GENERATED_BODY()
@@ -75,7 +75,7 @@ protected:
 	/**
 	 * The menu to be displayed when the user presses the "Pause" or "Escape" button 
 	 */
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(Category = "Menus", EditDefaultsOnly)
 	TSoftClassPtr<UCommonActivatableWidget> EscapeMenuClass;
 
 	/** 

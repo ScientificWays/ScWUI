@@ -48,7 +48,7 @@ public class ScWUI : ModuleRules
 			"ApplicationCore",
 			"DeveloperSettings",
 
-			"CommonUser",
+			//"CommonUser",
 			"GameSettings",
 		});
 	}

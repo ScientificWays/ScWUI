@@ -2,15 +2,15 @@
 
 #include "Messaging/ScWControllerDisconnectedWidget.h"
 
-#include UE_INLINE_GENERATED_CPP_BY_NAME(ScWControllerDisconnectedWidget)
+#include "Tags/ScWUITags.h"
 
-UE_DEFINE_GAMEPLAY_TAG_STATIC(TAG_Platform_Trait_Input_HasStrictControllerPairing, "Platform.Trait.Input.HasStrictControllerPairing");
+#include UE_INLINE_GENERATED_CPP_BY_NAME(ScWControllerDisconnectedWidget)
 
 UScWControllerDisconnectedWidget::UScWControllerDisconnectedWidget(const FObjectInitializer& InObjectInitializer)
 	: Super(InObjectInitializer)
 {
 	// By default, only strict pairing platforms will need this button.
-	PlatformSupportsUserChangeTags.AddTag(TAG_Platform_Trait_Input_HasStrictControllerPairing);
+	PlatformSupportsUserChangeTags.AddTag(FScWUITags::Platform_Trait_Input_HasStrictControllerPairing);
 }
 
 void UScWControllerDisconnectedWidget::NativeOnActivated()

@@ -42,6 +42,7 @@
 #include "CommonBorder.h"
 #include "CommonTextBlock.h"
 #include "CommonUISettings.h"
+#include "CommonUserWidget.h"
 #include "CommonButtonBase.h"
 #include "CommonActionWidget.h"
 #include "CommonRichTextBlock.h"

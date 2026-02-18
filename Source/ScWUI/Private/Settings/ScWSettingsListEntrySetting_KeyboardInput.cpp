@@ -3,8 +3,9 @@
 #include "Settings/ScWSettingsListEntrySetting_KeyboardInput.h"
 
 #include "CommonUIExtensions.h"
-#include "NativeGameplayTags.h"
 #include "Settings/Customization/ScWSettingKeyboardInput.h"
+
+#include "Tags/ScWUITags.h"
 
 #include "Widgets/ScWButtonBase.h"
 #include "Widgets/Misc/GameSettingPressAnyKey.h"
@@ -13,8 +14,6 @@
 #include UE_INLINE_GENERATED_CPP_BY_NAME(ScWSettingsListEntrySetting_KeyboardInput)
 
 #define LOCTEXT_NAMESPACE "ScWSettings"
-
-UE_DEFINE_GAMEPLAY_TAG_STATIC(PressAnyKeyLayer, "UI.Layer.Modal");
 
 void UScWSettingsListEntrySetting_KeyboardInput::SetSetting(UGameSetting* InSetting)
 {
@@ -38,7 +37,7 @@ void UScWSettingsListEntrySetting_KeyboardInput::NativeOnInitialized()
 void UScWSettingsListEntrySetting_KeyboardInput::HandlePrimaryKeyClicked()
 {
 	UGameSettingPressAnyKey* PressAnyKeyPanel = CastChecked<UGameSettingPressAnyKey>(
-		UCommonUIExtensions::PushContentToLayer_ForPlayer(GetOwningLocalPlayer(), PressAnyKeyLayer, PressAnyKeyPanelClass));
+		UCommonUIExtensions::PushContentToLayer_ForPlayer(GetOwningLocalPlayer(), FScWUITags::UI_Layer_Modal, PressAnyKeyPanelClass));
 	PressAnyKeyPanel->OnKeySelected.AddUObject(this, &ThisClass::HandlePrimaryKeySelected, PressAnyKeyPanel);
 	PressAnyKeyPanel->OnKeySelectionCanceled.AddUObject(this, &ThisClass::HandleKeySelectionCanceled, PressAnyKeyPanel);
 }
@@ -46,7 +45,7 @@ void UScWSettingsListEntrySetting_KeyboardInput::HandlePrimaryKeyClicked()
 void UScWSettingsListEntrySetting_KeyboardInput::HandleSecondaryKeyClicked()
 {
 	UGameSettingPressAnyKey* PressAnyKeyPanel = CastChecked<UGameSettingPressAnyKey>(
-		UCommonUIExtensions::PushContentToLayer_ForPlayer(GetOwningLocalPlayer(), PressAnyKeyLayer, PressAnyKeyPanelClass));
+		UCommonUIExtensions::PushContentToLayer_ForPlayer(GetOwningLocalPlayer(), FScWUITags::UI_Layer_Modal, PressAnyKeyPanelClass));
 	PressAnyKeyPanel->OnKeySelected.AddUObject(this, &ThisClass::HandleSecondaryKeySelected, PressAnyKeyPanel);
 	PressAnyKeyPanel->OnKeySelectionCanceled.AddUObject(this, &ThisClass::HandleKeySelectionCanceled, PressAnyKeyPanel);
 }
@@ -83,7 +82,7 @@ void UScWSettingsListEntrySetting_KeyboardInput::ChangeBinding(int32 InKeyBindSl
 	if (!ActionsForKey.IsEmpty())
 	{
 		UKeyAlreadyBoundWarning* KeyAlreadyBoundWarning = CastChecked<UKeyAlreadyBoundWarning>(
-		UCommonUIExtensions::PushContentToLayer_ForPlayer(GetOwningLocalPlayer(), PressAnyKeyLayer, KeyAlreadyBoundWarningPanelClass));
+		UCommonUIExtensions::PushContentToLayer_ForPlayer(GetOwningLocalPlayer(), FScWUITags::UI_Layer_Modal, KeyAlreadyBoundWarningPanelClass));
 
 		FString ActionNames;
 		for (FName ActionName : ActionsForKey)
