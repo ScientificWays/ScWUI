@@ -7,10 +7,10 @@
 namespace FScWUITags
 {
 	// Layers
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Layer_Game, "UI.Layer.Game", "[Native] TODO: Add description");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Layer_Menu, "UI.Layer.Menu", "[Native] TODO: Add description");
-	//UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Layer_Menu_Pause, "UI.Layer.Menu.Pause", "[Native] TODO: Add description");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Layer_Modal, "UI.Layer.Modal", "[Native] TODO: Add description");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Layer_Game, "UI.Layer.Game", "[Native] Gameplay layer like HUD.");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Layer_GameMenu, "UI.Layer.GameMenu", "[Native] Gamelay menus layer like Inventory.");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Layer_Menu, "UI.Layer.Menu", "[Native] Non-gameplay menu layer like Pause.");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Layer_Modal, "UI.Layer.Modal", "[Native] Non-gameplay pop-up windows layer like Confirm/Cancel.");
 
 	// Extension layers
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Extension_Center, "UI.Extension.Center", "[Native] TODO: Add description");

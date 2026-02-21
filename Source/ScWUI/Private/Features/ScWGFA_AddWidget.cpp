@@ -48,7 +48,7 @@ EDataValidationResult UScWGFA_AddWidgets::IsDataValid(FDataValidationContext& Co
 	EDataValidationResult Result = CombineDataValidationResults(Super::IsDataValid(Context), EDataValidationResult::Valid);
 	{
 		int32 EntryIndex = 0;
-		for (const FScWHUDLayoutRequest& Entry : Layout)
+		for (const FScWGameLayerRequest& Entry : Layout)
 		{
 			if (Entry.LayoutClass.IsNull())
 			{
@@ -144,7 +144,7 @@ void UScWGFA_AddWidgets::AddWidgets(AActor* Actor, FPerContextData& ActiveData)
 	{
 		FPerActorData& ActorData = ActiveData.ActorData.FindOrAdd(HUD);
 
-		for (const FScWHUDLayoutRequest& Entry : Layout)
+		for (const FScWGameLayerRequest& Entry : Layout)
 		{
 			if (TSubclassOf<UCommonActivatableWidget> ConcreteWidgetClass = Entry.LayoutClass.Get())
 			{

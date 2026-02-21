@@ -6,21 +6,21 @@
 
 #include "Widgets/ScWActivatableWidget.h"
 
-#include "ScWHUDLayout.generated.h"
+#include "ScWGameLayer.generated.h"
 
 class UScWControllerDisconnectedWidget;
 
 /**
- *	Widget used to lay out the player's HUD (typically specified by an Add Widgets action in the experience)
+ *	Widget used to lay out the player's game layer (typically specified by an Add Widgets action in the experience)
  */
-UCLASS(MinimalAPI, Abstract, BlueprintType, Blueprintable, meta = (DisplayName = "[ScW] HUD Layout", Category = "ScW | HUD"))
-class UScWHUDLayout : public UScWActivatableWidget
+UCLASS(MinimalAPI, Abstract, BlueprintType, Blueprintable, meta = (DisplayName = "[ScW] Game Layer", Category = "ScW | Game"))
+class UScWGameLayer : public UScWActivatableWidget
 {
 	GENERATED_BODY()
 
 public:
 
-	UScWHUDLayout(const FObjectInitializer& InObjectInitializer);
+	UScWGameLayer(const FObjectInitializer& InObjectInitializer);
 
 	virtual void NativeOnInitialized() override; // UUserWidget
 	virtual void NativeDestruct() override; // UUserWidget

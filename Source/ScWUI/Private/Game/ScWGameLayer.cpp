@@ -1,6 +1,6 @@
 // Scientific Ways
 
-#include "Game/ScWHUDLayout.h"
+#include "Game/ScWGameLayer.h"
 
 #include "CommonUIExtensions.h"
 
@@ -8,17 +8,23 @@
 
 #include "Messaging/ScWControllerDisconnectedWidget.h"
 
-#include UE_INLINE_GENERATED_CPP_BY_NAME(ScWHUDLayout)
+#include UE_INLINE_GENERATED_CPP_BY_NAME(ScWGameLayer)
 
-UScWHUDLayout::UScWHUDLayout(const FObjectInitializer& InObjectInitializer)
+UScWGameLayer::UScWGameLayer(const FObjectInitializer& InObjectInitializer)
 	: Super(InObjectInitializer)
 	, SpawnedControllerDisconnectedWidget(nullptr)
 {
+	bUseCustomInputConfig = true;
+
+	CustomInputConfig = FUIInputConfig(ECommonInputMode::Game, EMouseCaptureMode::CapturePermanently_IncludingInitialMouseDown, EMouseLockMode::LockAlways, false);
+	CustomInputConfig.bIgnoreMoveInput = false;
+	CustomInputConfig.bIgnoreLookInput = false;
+
 	// By default, only primary controller platforms require a disconnect screen. 
 	PlatformRequiresControllerDisconnectedWidget.AddTag(FScWUITags::Platform_Trait_Input_PrimaryController);
 }
 
-void UScWHUDLayout::NativeOnInitialized()
+void UScWGameLayer::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
 
@@ -34,7 +40,7 @@ void UScWHUDLayout::NativeOnInitialized()
 	}
 }
 
-void UScWHUDLayout::NativeDestruct()
+void UScWGameLayer::NativeDestruct()
 {
 	Super::NativeDestruct();
 
@@ -50,7 +56,7 @@ void UScWHUDLayout::NativeDestruct()
 	}
 }
 
-void UScWHUDLayout::HandleEscapeAction()
+void UScWGameLayer::HandleEscapeAction()
 {
 	if (ensure(!EscapeMenuClass.IsNull()))
 	{
@@ -58,7 +64,7 @@ void UScWHUDLayout::HandleEscapeAction()
 	}
 }
 
-void UScWHUDLayout::HandleInputDeviceConnectionChanged(EInputDeviceConnectionState NewConnectionState, FPlatformUserId PlatformUserId, FInputDeviceId InputDeviceId)
+void UScWGameLayer::HandleInputDeviceConnectionChanged(EInputDeviceConnectionState NewConnectionState, FPlatformUserId PlatformUserId, FInputDeviceId InputDeviceId)
 {
 	const FPlatformUserId OwningLocalPlayerId = GetOwningLocalPlayer()->GetPlatformUserId();
 
@@ -72,7 +78,7 @@ void UScWHUDLayout::HandleInputDeviceConnectionChanged(EInputDeviceConnectionSta
 	NotifyControllerStateChangeForDisconnectScreen();
 }
 
-void UScWHUDLayout::HandleInputDevicePairingChanged(FInputDeviceId InputDeviceId, FPlatformUserId NewUserPlatformId, FPlatformUserId OldUserPlatformId)
+void UScWGameLayer::HandleInputDevicePairingChanged(FInputDeviceId InputDeviceId, FPlatformUserId NewUserPlatformId, FPlatformUserId OldUserPlatformId)
 {
 	const FPlatformUserId OwningLocalPlayerId = GetOwningLocalPlayer()->GetPlatformUserId();
 
@@ -85,7 +91,7 @@ void UScWHUDLayout::HandleInputDevicePairingChanged(FInputDeviceId InputDeviceId
 	}
 }
 
-bool UScWHUDLayout::ShouldPlatformDisplayControllerDisconnectedWidget() const
+bool UScWGameLayer::ShouldPlatformDisplayControllerDisconnectedWidget() const
 {
 	// We only want this menu on primarily controller platforms
 	bool bHasAllRequiredTags = ICommonUIModule::GetSettings().GetPlatformTraits().HasAll(PlatformRequiresControllerDisconnectedWidget);
@@ -98,7 +104,7 @@ bool UScWHUDLayout::ShouldPlatformDisplayControllerDisconnectedWidget() const
 	return bHasAllRequiredTags;
 }
 
-void UScWHUDLayout::NotifyControllerStateChangeForDisconnectScreen()
+void UScWGameLayer::NotifyControllerStateChangeForDisconnectScreen()
 {
 	// We should only ever get here if we have bound to the controller state change delegates
 	ensure(ShouldPlatformDisplayControllerDisconnectedWidget());
@@ -115,7 +121,7 @@ void UScWHUDLayout::NotifyControllerStateChangeForDisconnectScreen()
 	}
 }
 
-void UScWHUDLayout::ProcessControllerDevicesHavingChangedForDisconnectScreen()
+void UScWGameLayer::ProcessControllerDevicesHavingChangedForDisconnectScreen()
 {
 	// We should only ever get here if we have bound to the controller state change delegates
 	ensure(ShouldPlatformDisplayControllerDisconnectedWidget());
@@ -155,7 +161,7 @@ void UScWHUDLayout::ProcessControllerDevicesHavingChangedForDisconnectScreen()
 	}
 }
 
-void UScWHUDLayout::DisplayControllerDisconnectedMenu_Implementation()
+void UScWGameLayer::DisplayControllerDisconnectedMenu_Implementation()
 {
 	UE_LOG(LogScWUI, Log, TEXT("[%hs] Display controller disconnected menu!"), __FUNCTION__);
 
@@ -166,7 +172,7 @@ void UScWHUDLayout::DisplayControllerDisconnectedMenu_Implementation()
 	}
 }
 
-void UScWHUDLayout::HideControllerDisconnectedMenu_Implementation()
+void UScWGameLayer::HideControllerDisconnectedMenu_Implementation()
 {
 	UE_LOG(LogScWUI, Log, TEXT("[%hs] Hide controller disconnected menu!"), __FUNCTION__);
 	

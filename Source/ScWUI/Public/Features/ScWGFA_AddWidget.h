@@ -13,7 +13,7 @@ struct FWorldContext;
 struct FComponentRequestHandle;
 
 USTRUCT()
-struct FScWHUDLayoutRequest
+struct FScWGameLayerRequest
 {
 	GENERATED_BODY()
 
@@ -69,7 +69,7 @@ public:
 private:
 	// Layout to add to the HUD
 	UPROPERTY(EditAnywhere, Category=UI, meta = (TitleProperty="{LayerTag} -> {LayoutClass}"))
-	TArray<FScWHUDLayoutRequest> Layout;
+	TArray<FScWGameLayerRequest> Layout;
 
 	// Widgets to add to the HUD
 	UPROPERTY(EditAnywhere, Category=UI, meta = (TitleProperty="{ExtensionTag} -> {WidgetClass}"))

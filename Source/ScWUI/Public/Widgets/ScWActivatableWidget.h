@@ -36,7 +36,7 @@ public:
 public:
 	virtual TOptional<struct FUIInputConfig> GetDesiredInputConfig() const override; // UCommonActivatableWidget
 
-	UPROPERTY(Category = "Input", EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(Category = "Input", EditAnywhere, BlueprintReadOnly, meta = (InlineEditConditionToggle))
 	bool bUseCustomInputConfig;
 
 	UPROPERTY(Category = "Input", EditAnywhere, BlueprintReadOnly, meta = (EditCondition = "bUseCustomInputConfig"))

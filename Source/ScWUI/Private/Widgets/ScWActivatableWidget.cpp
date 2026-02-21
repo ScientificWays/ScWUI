@@ -12,6 +12,8 @@
 UScWActivatableWidget::UScWActivatableWidget(const FObjectInitializer& InObjectInitializer)
 	: Super(InObjectInitializer)
 {
+	bUseCustomInputConfig = false;
+
 	CustomInputConfig = FUIInputConfig(ECommonInputMode::Menu, EMouseCaptureMode::NoCapture, EMouseLockMode::DoNotLock, false);
 	CustomInputConfig.bIgnoreMoveInput = true;
 	CustomInputConfig.bIgnoreLookInput = true;
