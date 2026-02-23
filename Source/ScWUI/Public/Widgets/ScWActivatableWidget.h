@@ -8,6 +8,15 @@
 
 #include "ScWActivatableWidget.generated.h"
 
+USTRUCT(BlueprintType)
+struct FGameplayMessage_Widget_Activatable
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TObjectPtr<class UScWActivatableWidget> Widget;
+};
+
 // An activatable widget that automatically drives the desired input config when activated
 UCLASS(MinimalAPI, Abstract, Blueprintable, meta = (DisplayName = "[ScW] Activatable Widget"))
 class UScWActivatableWidget : public UCommonActivatableWidget

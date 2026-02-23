@@ -6,7 +6,9 @@
 
 #include "ScWButtonBase.generated.h"
 
-UCLASS(MinimalAPI, Abstract, BlueprintType, Blueprintable)
+#define MODULE_API SCWUI_API
+
+UCLASS(MinimalAPI, Abstract, BlueprintType, Blueprintable, meta = (DisplayName = "[ScW] Button Base"))
 class UScWButtonBase : public UCommonButtonBase
 {
 	GENERATED_BODY()
@@ -14,7 +16,7 @@ class UScWButtonBase : public UCommonButtonBase
 public:
 
 	UFUNCTION(BlueprintCallable)
-	SCWUI_API void SetButtonText(const FText& InText);
+	MODULE_API void SetButtonText(const FText& InText);
 	
 protected:
 	virtual void NativePreConstruct() override; // UUserWidget
@@ -23,16 +25,19 @@ protected:
 
 	void RefreshButtonText();
 	
-	UFUNCTION(BlueprintImplementableEvent)
-	SCWUI_API void UpdateButtonText(const FText& InText);
+	UFUNCTION(Category = "Button", BlueprintImplementableEvent, meta = (DisplayName = "Update Button Text"))
+	MODULE_API void BP_UpdateButtonText(const FText& InText);
 
-	UFUNCTION(BlueprintImplementableEvent)
-	SCWUI_API void UpdateButtonStyle();
+	UFUNCTION(Category = "Button", BlueprintImplementableEvent, meta = (DisplayName = "Update Button Style"))
+	MODULE_API void BP_UpdateButtonStyle();
 	
 private:
-	UPROPERTY(EditAnywhere, Category="Button", meta = (InlineEditConditionToggle))
+
+	UPROPERTY(Category = "Button", EditAnywhere, meta = (InlineEditConditionToggle))
 	uint8 bOverride_ButtonText : 1;
 	
-	UPROPERTY(EditAnywhere, Category="Button", meta = ( editcondition="bOverride_ButtonText" ))
+	UPROPERTY(Category = "Button", EditAnywhere, meta = (EditCondition = "bOverride_ButtonText"))
 	FText ButtonText;
 };
+
+#undef MODULE_API

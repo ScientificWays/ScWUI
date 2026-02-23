@@ -8,7 +8,7 @@ void UScWButtonBase::NativePreConstruct() // UUserWidget
 {
 	Super::NativePreConstruct();
 
-	UpdateButtonStyle();
+	BP_UpdateButtonStyle();
 	RefreshButtonText();
 }
 
@@ -16,7 +16,7 @@ void UScWButtonBase::UpdateInputActionWidget() // UCommonButtonBase
 {
 	Super::UpdateInputActionWidget();
 
-	UpdateButtonStyle();
+	BP_UpdateButtonStyle();
 	RefreshButtonText();
 }
 
@@ -36,18 +36,17 @@ void UScWButtonBase::RefreshButtonText()
 			const FText ActionDisplayText = InputActionWidget->GetDisplayText();	
 			if (!ActionDisplayText.IsEmpty())
 			{
-				UpdateButtonText(ActionDisplayText);
+				BP_UpdateButtonText(ActionDisplayText);
 				return;
 			}
 		}
 	}
-	
-	UpdateButtonText(ButtonText);	
+	BP_UpdateButtonText(ButtonText);
 }
 
 void UScWButtonBase::OnInputMethodChanged(ECommonInputType InCurrentInputType)
 {
 	Super::OnInputMethodChanged(InCurrentInputType);
 
-	UpdateButtonStyle();
+	BP_UpdateButtonStyle();
 }

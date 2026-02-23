@@ -25,4 +25,10 @@ namespace FScWUITags
 	// Platform traits
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Platform_Trait_Input_PrimaryController, "Platform.Trait.Input.PrimaryController", "[Native] TODO: Add description");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Platform_Trait_Input_HasStrictControllerPairing, "Platform.Trait.Input.HasStrictControllerPairing", "[Native] TODO: Add description");
+
+	// Gameplay messages
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayMessage_Widget, "GameplayMessage.Widget", "[Native] TODO: Add description");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayMessage_Widget_Activatable, "GameplayMessage.Widget.Activatable", "[Native] TODO: Add description");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayMessage_Widget_Activatable_Activated, "GameplayMessage.Widget.Activatable.Activated", "[Native] TODO: Add description");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayMessage_Widget_Activatable_Deactivated, "GameplayMessage.Widget.Activatable.Deactivated", "[Native] TODO: Add description");
 }

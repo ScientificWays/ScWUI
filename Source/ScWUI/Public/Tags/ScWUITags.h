@@ -29,6 +29,12 @@ namespace FScWUITags
 	// Platform traits
 	MODULE_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Platform_Trait_Input_PrimaryController);
 	MODULE_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Platform_Trait_Input_HasStrictControllerPairing);
+
+	// Gameplay messages
+	MODULE_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayMessage_Widget);
+	MODULE_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayMessage_Widget_Activatable);
+	MODULE_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayMessage_Widget_Activatable_Activated);
+	MODULE_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayMessage_Widget_Activatable_Deactivated);
 }
 
 #undef MODULE_API

@@ -2,7 +2,10 @@
 
 #include "Widgets/ScWActivatableWidget.h"
 
+#include "Tags/ScWUITags.h"
+
 #include "Game/ScWGamePauseSubsystem.h"
+#include "GameFramework/GameplayMessageSubsystem.h"
 
 #include UE_INLINE_GENERATED_CPP_BY_NAME(ScWActivatableWidget)
 
@@ -38,9 +41,12 @@ void UScWActivatableWidget::NativeOnActivated() // UCommonActivatableWidget
 			}
 			else
 			{
-				UE_LOG(LogScWUI, Error, TEXT("%hs world should have UScWGamePauseSubsystem for widget to work properly!"), __func__);
+				UE_LOG(LogScWUI, Error, TEXT("%hs world should have UScWGamePauseSubsystem for widget to work properly!"), __FUNCTION__);
 			}
 		}
+		UGameplayMessageSubsystem& GameplayMessageSubsystem = UGameplayMessageSubsystem::Get(this);
+		FGameplayMessage_Widget_Activatable ActivatedMessage = { this };
+		GameplayMessageSubsystem.BroadcastMessage(FScWUITags::GameplayMessage_Widget_Activatable_Activated, ActivatedMessage);
 	}
 }
 
@@ -59,9 +65,12 @@ void UScWActivatableWidget::NativeOnDeactivated() // UCommonActivatableWidget
 			}
 			else
 			{
-				UE_LOG(LogScWUI, Error, TEXT("%hs world should have UScWGamePauseSubsystem for widget to work properly!"), __func__);
+				UE_LOG(LogScWUI, Error, TEXT("%hs world should have UScWGamePauseSubsystem for widget to work properly!"), __FUNCTION__);
 			}
 		}
+		UGameplayMessageSubsystem& GameplayMessageSubsystem = UGameplayMessageSubsystem::Get(this);
+		FGameplayMessage_Widget_Activatable DeactivatedMessage = { this };
+		GameplayMessageSubsystem.BroadcastMessage(FScWUITags::GameplayMessage_Widget_Activatable_Deactivated, DeactivatedMessage);
 	}
 	Super::NativeOnDeactivated();
 }
@@ -101,7 +110,7 @@ void UScWActivatableWidget::RemoveAnimated()
 		}
 		else
 		{
-			UE_LOG(LogScWUI, Error, TEXT("%hs world should have UScWGamePauseSubsystem for widget to work properly!"), __func__);
+			UE_LOG(LogScWUI, Error, TEXT("%hs world should have UScWGamePauseSubsystem for widget to work properly!"), __FUNCTION__);
 		}
 	}
 	BP_HandleRemoveAnimated();
@@ -109,7 +118,7 @@ void UScWActivatableWidget::RemoveAnimated()
 
 void UScWActivatableWidget::BP_HandleRemoveAnimated_Implementation()
 {
-	UE_LOG(LogScWUI, Error, TEXT("%hs is not implemented on %s!"), __func__, *GetName());
+	UE_LOG(LogScWUI, Error, TEXT("%hs is not implemented on %s!"), __FUNCTION__, *GetName());
 }
 //~ End Initialize
 
