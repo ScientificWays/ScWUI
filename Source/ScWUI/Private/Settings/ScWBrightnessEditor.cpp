@@ -22,8 +22,8 @@ namespace BrightnessEditor
 	const float SafeZoneChangeSpeed = 0.1f;
 }
 
-UScWBrightnessEditor::UScWBrightnessEditor(const FObjectInitializer& Initializer)
-	: Super(Initializer)
+UScWBrightnessEditor::UScWBrightnessEditor(const FObjectInitializer& InObjectInitializer)
+	: Super(InObjectInitializer)
 {
 	SetVisibility(ESlateVisibility::Visible);
 	SetIsFocusable(true);
@@ -50,7 +50,7 @@ void UScWBrightnessEditor::NativeOnActivated()
 	}
 }
 
-bool UScWBrightnessEditor::ExecuteActionForSetting_Implementation(FGameplayTag ActionTag, UGameSetting* InSetting)
+bool UScWBrightnessEditor::ExecuteActionForSetting_Implementation(FGameplayTag ActionTag, UGameSetting* InSetting) // IGameSettingActionInterface
 {
 	TArray<UGameSetting*> ChildSettings = InSetting ? InSetting->GetChildSettings() : TArray<UGameSetting*>();
 	if (ChildSettings.Num() > 0 && ChildSettings[0])

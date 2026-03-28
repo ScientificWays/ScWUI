@@ -10,10 +10,10 @@ UScWActionWidget::UScWActionWidget(const FObjectInitializer& InObjectInitializer
 
 }
 
-//~ Editor
+//~ Begin Editor
 void UScWActionWidget::SetDesignTimeKey(const FKey& InKey)
 {
 	DesignTimeKey = InKey;
 	UpdateActionWidget();
 }
-//~ Editor
+//~ End Editor

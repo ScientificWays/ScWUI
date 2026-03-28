@@ -8,6 +8,8 @@
 
 #include "ScWGameLayer.generated.h"
 
+#define MODULE_API SCWUI_API
+
 class UScWControllerDisconnectedWidget;
 
 /**
@@ -18,78 +20,61 @@ class UScWGameLayer : public UScWActivatableWidget
 {
 	GENERATED_BODY()
 
+//~ Begin Initialize
 public:
 
 	UScWGameLayer(const FObjectInitializer& InObjectInitializer);
 
 	virtual void NativeOnInitialized() override; // UUserWidget
 	virtual void NativeDestruct() override; // UUserWidget
+//~ End Initialize
 
+//~ Begin Escape Menu
 protected:
 	void HandleEscapeAction();
-	
-	/** 
-	* Callback for when controllers are disconnected. This will check if the player now has 
-	* no mapped input devices to them, which would mean that they can't play the game.
-	* 
-	* If this is the case, then call DisplayControllerDisconnectedMenu.
+
+	/** The menu to be displayed when the user presses the "Pause" or "Escape" button */
+	UPROPERTY(Category = "Menus", EditDefaultsOnly)
+	TSoftClassPtr<UCommonActivatableWidget> EscapeMenuClass;
+//~ End Escape Menu
+
+//~ Begin Controller Disconnect
+protected:
+
+	/**
+	* Callback for when controllers are disconnected. Checks if the player has
+	* no mapped input devices, and if so calls DisplayControllerDisconnectedMenu.
 	*/
 	void HandleInputDeviceConnectionChanged(EInputDeviceConnectionState NewConnectionState, FPlatformUserId PlatformUserId, FInputDeviceId InputDeviceId);
 
 	/**
-	* Callback for when controllers change their owning platform user. We will use this to check
-	* if we no longer need to display the "Controller Disconnected" menu
+	* Callback for when controllers change their owning platform user. Checks
+	* if we no longer need to display the "Controller Disconnected" menu.
 	*/
 	void HandleInputDevicePairingChanged(FInputDeviceId InputDeviceId, FPlatformUserId NewUserPlatformId, FPlatformUserId OldUserPlatformId);
-	
-	/**
-	* Notify this widget that the state of controllers for the player have changed. Queue a timer for next tick to 
-	* process them and see if we need to show/hide the "controller disconnected" widget.
-	*/
+
+	/** Queue processing of controller state for next tick. */
 	void NotifyControllerStateChangeForDisconnectScreen();
 
-	/**
-	 * This will check the state of the connected controllers to the player. If they do not have
-	 * any controllers connected to them, then we should display the Disconnect menu. If they do have
-	 * controllers connected to them, then we can hide the disconnect menu if its showing.
-	 */
+	/** Check connected controllers and show/hide the disconnect menu accordingly. */
 	virtual void ProcessControllerDevicesHavingChangedForDisconnectScreen();
 
-	/**
-     * Returns true if this platform supports a "controller disconnected" screen. 
-     */
-    virtual bool ShouldPlatformDisplayControllerDisconnectedWidget() const;
-	
-	/**
-	* Pushes the ControllerDisconnectedMenuClass to the Menu layer (UI.Layer.Menu)
-	*/
-	UFUNCTION(BlueprintNativeEvent, Category = "Controller Disconnect Menu")
-	SCWUI_API void DisplayControllerDisconnectedMenu();
+	/** Returns true if this platform supports a "controller disconnected" screen. */
+	virtual bool ShouldPlatformDisplayControllerDisconnectedWidget() const;
 
-	/**
-	* Hides the controller disconnected menu if it is active.
-	*/
+	/** Pushes the ControllerDisconnectedMenuClass to the Menu layer (UI.Layer.Menu) */
 	UFUNCTION(BlueprintNativeEvent, Category = "Controller Disconnect Menu")
-	SCWUI_API void HideControllerDisconnectedMenu();
-	
-	/**
-	 * The menu to be displayed when the user presses the "Pause" or "Escape" button 
-	 */
-	UPROPERTY(Category = "Menus", EditDefaultsOnly)
-	TSoftClassPtr<UCommonActivatableWidget> EscapeMenuClass;
+	MODULE_API void DisplayControllerDisconnectedMenu();
 
-	/** 
-	* The widget which should be presented to the user if all of their controllers are disconnected.
-	*/
+	/** Hides the controller disconnected menu if it is active. */
+	UFUNCTION(BlueprintNativeEvent, Category = "Controller Disconnect Menu")
+	MODULE_API void HideControllerDisconnectedMenu();
+
+	/** The widget class presented when all controllers are disconnected. */
 	UPROPERTY(EditDefaultsOnly, Category = "Controller Disconnect Menu")
 	TSubclassOf<UScWControllerDisconnectedWidget> ControllerDisconnectedScreen;
 
-	/**
-	 * The platform tags that are required in order to show the "Controller Disconnected" screen.
-	 *
-	 * If these tags are not set in the INI file for this platform, then the controller disconnect screen
-	 * will not ever be displayed. 
-	 */
+	/** Platform tags required to show the "Controller Disconnected" screen. */
 	UPROPERTY(EditDefaultsOnly, Category = "Controller Disconnect Menu")
 	FGameplayTagContainer PlatformRequiresControllerDisconnectedWidget;
 
@@ -99,4 +84,7 @@ protected:
 
 	/** Handle from the FSTicker for when we want to process the controller state of our player */
 	FTSTicker::FDelegateHandle RequestProcessControllerStateHandle;
+//~ End Controller Disconnect
 };
+
+#undef MODULE_API

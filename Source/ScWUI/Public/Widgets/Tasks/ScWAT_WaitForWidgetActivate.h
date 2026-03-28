@@ -13,13 +13,14 @@
 #define MODULE_API SCWUI_API
 
 /**
- *	
+ *	Async action that fires when a CommonActivatableWidget is activated, with optional single-trigger mode.
  */
 UCLASS(MinimalAPI)
 class UScWAT_WaitForWidgetActivate : public UCancellableAsyncAction
 {
 	GENERATED_BODY()
 
+//~ Begin Public API
 public:
 
 	UPROPERTY(BlueprintAssignable)
@@ -30,6 +31,9 @@ public:
 
 	virtual void Activate() override; // UBlueprintAsyncActionBase
 	virtual void Cancel() override; // UCancellableAsyncAction
+//~ End Public API
+
+//~ Begin Internal
 protected:
 
 	UPROPERTY()
@@ -39,16 +43,18 @@ protected:
 	bool bTriggerOnce;
 
 	void HandleOnWidgetActivated();
+//~ End Internal
 };
 
 /**
- *
+ *	Async action that fires when a CommonActivatableWidget is deactivated, with optional single-trigger mode.
  */
 UCLASS(MinimalAPI)
 class UScWAT_WaitForWidgetDeactivate : public UCancellableAsyncAction
 {
 	GENERATED_BODY()
 
+//~ Begin Public API
 public:
 
 	UPROPERTY(BlueprintAssignable)
@@ -59,6 +65,9 @@ public:
 
 	virtual void Activate() override; // UBlueprintAsyncActionBase
 	virtual void Cancel() override; // UCancellableAsyncAction
+//~ End Public API
+
+//~ Begin Internal
 protected:
 
 	UPROPERTY()
@@ -68,6 +77,7 @@ protected:
 	bool bTriggerOnce;
 
 	void HandleOnWidgetDeactivated();
+//~ End Internal
 };
 
 #undef MODULE_API

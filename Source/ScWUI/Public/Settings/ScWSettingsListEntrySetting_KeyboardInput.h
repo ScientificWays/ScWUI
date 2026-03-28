@@ -14,23 +14,27 @@ class UScWButtonBase;
 class UScWSettingKeyboardInput;
 class UObject;
 
-//////////////////////////////////////////////////////////////////////////
-// UScWSettingsListEntrySetting_KeyboardInput
-//////////////////////////////////////////////////////////////////////////
-
-UCLASS(Abstract, Blueprintable, meta = (Category = "Settings", DisableNativeTick))
+/**
+ *	Settings list entry for rebinding primary/secondary keyboard keys with duplicate-key warnings.
+ */
+UCLASS(MinimalAPI, Abstract, Blueprintable, meta = (Category = "Settings", DisableNativeTick, DisplayName = "[ScW] Settings Keyboard Input Entry"))
 class UScWSettingsListEntrySetting_KeyboardInput : public UGameSettingListEntry_Setting
 {
 	GENERATED_BODY()
 
+//~ Begin Setting
 public:
-	virtual void SetSetting(UGameSetting* InSetting) override;
-
+	virtual void SetSetting(UGameSetting* InSetting) override; // UGameSettingListEntry_Setting
 protected:
-	virtual void NativeOnInitialized() override;
-	virtual void NativeOnEntryReleased() override;
-	virtual void OnSettingChanged() override;
+	virtual void NativeOnInitialized() override; // UUserWidget
+	virtual void NativeOnEntryReleased() override; // UUserWidget
+	virtual void OnSettingChanged() override; // UGameSettingListEntry_Setting
 
+	void Refresh();
+//~ End Setting
+
+//~ Begin Key Binding
+protected:
 	void HandlePrimaryKeyClicked();
 	void HandleSecondaryKeyClicked();
 	void HandleClearClicked();
@@ -43,8 +47,6 @@ protected:
 	void ChangeBinding(int32 BindSlot, FKey InKey);
 	void HandleKeySelectionCanceled(UGameSettingPressAnyKey* PressAnyKeyPanel);
 	void HandleKeySelectionCanceled(UKeyAlreadyBoundWarning* PressAnyKeyPanel);
-
-	void Refresh();
 
 private:
 	UPROPERTY(Transient)
@@ -59,8 +61,10 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<UKeyAlreadyBoundWarning> KeyAlreadyBoundWarningPanelClass;
+//~ End Key Binding
 
-private:	// Bound Widgets
+//~ Begin Bound Widgets
+private:
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget, BlueprintProtected = true, AllowPrivateAccess = true))
 	TObjectPtr<UScWButtonBase> Button_PrimaryKey;
 
@@ -72,4 +76,5 @@ private:	// Bound Widgets
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget, BlueprintProtected = true, AllowPrivateAccess = true))
 	TObjectPtr<UScWButtonBase> Button_ResetToDefault;
+//~ End Bound Widgets
 };

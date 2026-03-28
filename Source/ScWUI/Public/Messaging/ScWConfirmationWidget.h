@@ -8,32 +8,38 @@
 
 #include "ScWConfirmationWidget.generated.h"
 
+#define MODULE_API SCWUI_API
+
 /**
- *	
+ *	Confirmation dialog that dynamically creates action buttons and supports tap-to-close dismissal.
  */
-UCLASS(MinimalAPI, Abstract, BlueprintType, Blueprintable)
+UCLASS(MinimalAPI, Abstract, BlueprintType, Blueprintable, meta = (DisplayName = "[ScW] Confirmation Widget"))
 class UScWConfirmationWidget : public UCommonGameDialog
 {
 	GENERATED_BODY()
-public:
-	virtual void SetupDialog(UCommonGameDialogDescriptor* InDescriptor, FCommonMessagingResultDelegate InResultCallback) override;
-	virtual void KillDialog() override;
 
+//~ Begin Dialog
+public:
+	virtual void SetupDialog(UCommonGameDialogDescriptor* InDescriptor, FCommonMessagingResultDelegate InResultCallback) override; // UCommonGameDialog
+	virtual void KillDialog() override; // UCommonGameDialog
 protected:
 	virtual void NativeOnInitialized() override; // UUserWidget
 	virtual void CloseConfirmationWindow(ECommonMessagingResult InResult);
-
 #if WITH_EDITOR
-	virtual void ValidateCompiledDefaults(IWidgetCompilerLog& InCompileLog) const override;
+	virtual void ValidateCompiledDefaults(IWidgetCompilerLog& InCompileLog) const override; // UUserWidget
 #endif
+//~ End Dialog
 
+//~ Begin Callbacks
 private:
 
 	UFUNCTION()
 	FEventReply HandleTapToCloseZoneMouseButtonDown(FGeometry InMyGeometry, const FPointerEvent& InMouseEvent);
 
 	FCommonMessagingResultDelegate OnResultCallback;
+//~ End Callbacks
 
+//~ Begin Bound Widgets
 private:
 	UPROPERTY(Meta = (BindWidget))
 	TObjectPtr<UCommonTextBlock> Text_Title;
@@ -49,4 +55,7 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, meta = (RowType = "/Script/CommonUI.CommonInputActionDataBase"))
 	FDataTableRowHandle CancelAction;
+//~ End Bound Widgets
 };
+
+#undef MODULE_API

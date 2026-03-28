@@ -17,7 +17,7 @@ namespace FScWUITags
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Extension_TopLeft, "UI.Extension.TopLeft", "[Native] TODO: Add description");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Extension_TopRight, "UI.Extension.TopRight", "[Native] TODO: Add description");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Extension_BottomLeft, "UI.Extension.BottomLeft", "[Native] TODO: Add description");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Extension_BottomRight, "UI.Extension.BotoomRight", "[Native] TODO: Add description");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Extension_BottomRight, "UI.Extension.BottomRight", "[Native] TODO: Add description");
 
 	// Actions
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Action_Escape, "UI.Action.Escape", "[Native] TODO: Add description");

@@ -2,9 +2,7 @@
 
 #include "Widgets/Tasks/ScWAT_WaitForWidgetActivate.h"
 
-/////////////////////////////////////////////////
-///////// UScWAT_WaitForWidgetActivate
-/////////////////////////////////////////////////
+//~ Begin UScWAT_WaitForWidgetActivate
 UScWAT_WaitForWidgetActivate* UScWAT_WaitForWidgetActivate::WaitForWidgetActivate(UCommonActivatableWidget* InWidget, const bool bInTriggerOnce)
 {
 	ensureReturn(InWidget, nullptr);
@@ -47,10 +45,9 @@ void UScWAT_WaitForWidgetActivate::HandleOnWidgetActivated()
 		SetReadyToDestroy();
 	}
 }
+//~ End UScWAT_WaitForWidgetActivate
 
-/////////////////////////////////////////////////
-///////// UScWAT_WaitForWidgetDeactivate
-/////////////////////////////////////////////////
+//~ Begin UScWAT_WaitForWidgetDeactivate
 UScWAT_WaitForWidgetDeactivate* UScWAT_WaitForWidgetDeactivate::WaitForWidgetDeactivate(UCommonActivatableWidget* InWidget, const bool bInTriggerOnce)
 {
 	ensureReturn(InWidget, nullptr);
@@ -93,3 +90,4 @@ void UScWAT_WaitForWidgetDeactivate::HandleOnWidgetDeactivated()
 		SetReadyToDestroy();
 	}
 }
+//~ End UScWAT_WaitForWidgetDeactivate

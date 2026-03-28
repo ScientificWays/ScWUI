@@ -7,6 +7,8 @@
 
 #include "ScWSafeZoneEditor.generated.h"
 
+#define MODULE_API SCWUI_API
+
 enum class ECommonInputType : uint8;
 
 class UCommonButtonBase;
@@ -21,33 +23,39 @@ struct FGameplayTag;
 struct FGeometry;
 struct FPointerEvent;
 
-UCLASS(Abstract)
+/**
+ *	Safe zone adjustment widget driven by analog stick and mouse wheel input.
+ */
+UCLASS(MinimalAPI, Abstract, meta = (DisplayName = "[ScW] Safe Zone Editor"))
 class UScWSafeZoneEditor : public UCommonActivatableWidget, public IGameSettingActionInterface
 {
 	GENERATED_BODY()
 
+//~ Begin Initialize
 public:
 	FSimpleMulticastDelegate OnSafeZoneSet;
-	
+
 public:
-	UScWSafeZoneEditor(const FObjectInitializer& Initializer);
+	UScWSafeZoneEditor(const FObjectInitializer& InObjectInitializer);
 
-	// Begin IGameSettingActionInterface
-	virtual bool ExecuteActionForSetting_Implementation(FGameplayTag ActionTag, UGameSetting* InSetting) override;
-	// End IGameSettingActionInterface
+	virtual bool ExecuteActionForSetting_Implementation(FGameplayTag ActionTag, UGameSetting* InSetting) override; // IGameSettingActionInterface
+//~ End Initialize
 
+//~ Begin Overrides
 protected:
 
 	UPROPERTY(EditAnywhere, Category = "Restrictions")
 	bool bCanCancel = true;
 
-	virtual void NativeOnActivated() override;
-	virtual void NativeOnInitialized() override;
-	virtual FReply NativeOnAnalogValueChanged(const FGeometry& InGeometry, const FAnalogInputEvent& InAnalogEvent) override;
-	virtual FReply NativeOnMouseWheel(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent) override;
-	
-	void HandleInputModeChanged(ECommonInputType InInputType);
+	virtual void NativeOnActivated() override; // UCommonActivatableWidget
+	virtual void NativeOnInitialized() override; // UUserWidget
+	virtual FReply NativeOnAnalogValueChanged(const FGeometry& InGeometry, const FAnalogInputEvent& InAnalogEvent) override; // UUserWidget
+	virtual FReply NativeOnMouseWheel(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent) override; // UUserWidget
 
+	void HandleInputModeChanged(ECommonInputType InInputType);
+//~ End Overrides
+
+//~ Begin Callbacks
 private:
 	UFUNCTION()
 	void HandleBackClicked();
@@ -56,7 +64,10 @@ private:
 	void HandleDoneClicked();
 
 	TWeakObjectPtr<UGameSettingValueScalar> ValueSetting;
+//~ End Callbacks
 
+//~ Begin Bound Widgets
+private:
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget, AllowPrivateAccess = true))
 	TObjectPtr<UWidgetSwitcher> Switcher_SafeZoneMessage;
 
@@ -68,4 +79,7 @@ private:
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget, AllowPrivateAccess = true))
 	TObjectPtr<UCommonButtonBase> Button_Done;
+//~ End Bound Widgets
 };
+
+#undef MODULE_API

@@ -27,7 +27,7 @@ public:
 	DECLARE_DYNAMIC_DELEGATE_RetVal_OneParam(TSubclassOf<UUserWidget>, FOnGetWidgetClassForData, UObject*, DataItem);
 	DECLARE_DYNAMIC_DELEGATE_TwoParams(FOnConfigureWidgetForData, UUserWidget*, Widget, UObject*, DataItem);
 
-	UE_API UUIExtensionPointWidget(const FObjectInitializer& ObjectInitializer);
+	UE_API UUIExtensionPointWidget(const FObjectInitializer& InObjectInitializer);
 
 	//~UWidget interface
 	UE_API virtual void ReleaseSlateResources(bool bReleaseChildren) override;

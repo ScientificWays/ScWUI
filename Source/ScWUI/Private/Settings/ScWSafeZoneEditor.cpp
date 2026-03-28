@@ -22,8 +22,8 @@ namespace SafeZoneEditor
 	const float SafeZoneChangeSpeed = 0.1f;	
 }
 
-UScWSafeZoneEditor::UScWSafeZoneEditor(const FObjectInitializer& Initializer)
-	: Super(Initializer)
+UScWSafeZoneEditor::UScWSafeZoneEditor(const FObjectInitializer& InObjectInitializer)
+	: Super(InObjectInitializer)
 {
 	SetVisibility(ESlateVisibility::Visible);
 	SetIsFocusable(true);
@@ -41,16 +41,16 @@ void UScWSafeZoneEditor::NativeOnActivated()
 
 	SSafeZone::SetGlobalSafeZoneScale(UScWSettingsLocal::Get()->GetSafeZone());
 	
-	Button_Done->OnClicked().AddUObject(this, &UScWSafeZoneEditor::HandleDoneClicked);
+	Button_Done->OnClicked().AddUObject(this, &ThisClass::HandleDoneClicked);
 
 	Button_Back->SetVisibility((bCanCancel)? ESlateVisibility::Visible : ESlateVisibility::Collapsed);
 	if (bCanCancel)
 	{
-		Button_Back->OnClicked().AddUObject(this, &UScWSafeZoneEditor::HandleBackClicked);
+		Button_Back->OnClicked().AddUObject(this, &ThisClass::HandleBackClicked);
 	}
 }
 
-bool UScWSafeZoneEditor::ExecuteActionForSetting_Implementation(FGameplayTag ActionTag, UGameSetting* InSetting)
+bool UScWSafeZoneEditor::ExecuteActionForSetting_Implementation(FGameplayTag ActionTag, UGameSetting* InSetting) // IGameSettingActionInterface
 {
 	TArray<UGameSetting*> ChildSettings = InSetting ? InSetting->GetChildSettings() : TArray<UGameSetting*>();
 	if (ChildSettings.Num() > 0 && ChildSettings[0])

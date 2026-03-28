@@ -10,9 +10,6 @@
 
 #define LOCTEXT_NAMESPACE "ScWGameFeatures"
 
-//////////////////////////////////////////////////////////////////////
-// UScWGFA_SplitscreenConfig
-
 TMap<FObjectKey, int32> UScWGFA_SplitscreenConfig::GlobalDisableVotes;
 
 void UScWGFA_SplitscreenConfig::OnGameFeatureDeactivating(FGameFeatureDeactivatingContext& Context)

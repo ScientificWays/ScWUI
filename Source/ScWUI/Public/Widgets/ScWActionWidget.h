@@ -6,10 +6,12 @@
 
 #include "ScWActionWidget.generated.h"
 
+#define MODULE_API SCWUI_API
+
 /**
- * 
+ *	Action widget with editor-time key preview support.
  */
-UCLASS(MinimalAPI)
+UCLASS(MinimalAPI, meta = (DisplayName = "[ScW] Action Widget"))
 class UScWActionWidget : public UCommonActionWidget
 {
 	GENERATED_BODY()
@@ -17,10 +19,11 @@ class UScWActionWidget : public UCommonActionWidget
 public:
 	UScWActionWidget(const FObjectInitializer& InObjectInitializer);
 
-//~ Editor
+//~ Begin Editor
 public:
-	
 	UFUNCTION(Category = "CommonActionWidget", BlueprintCallable)
-	SCWUI_API void SetDesignTimeKey(const FKey& InKey);
-//~ Editor
+	MODULE_API void SetDesignTimeKey(const FKey& InKey);
+//~ End Editor
 };
+
+#undef MODULE_API

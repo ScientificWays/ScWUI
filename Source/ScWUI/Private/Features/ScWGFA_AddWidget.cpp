@@ -18,15 +18,12 @@
 
 #define LOCTEXT_NAMESPACE "ScWGameFeatures"
 
-//////////////////////////////////////////////////////////////////////
-// UScWGFA_AddWidgets
-
 void UScWGFA_AddWidgets::OnGameFeatureDeactivating(FGameFeatureDeactivatingContext& Context)
 {
 	Super::OnGameFeatureDeactivating(Context);
 
 	FPerContextData* ActiveData = ContextData.Find(Context);
-	if ensure(ActiveData)
+	if (ensure(ActiveData))
 	{
 		Reset(*ActiveData);
 	}

@@ -15,8 +15,8 @@
 /////////////////////////////////////////////////////
 // UUIExtensionPointWidget
 
-UUIExtensionPointWidget::UUIExtensionPointWidget(const FObjectInitializer& ObjectInitializer)
-	: Super(ObjectInitializer)
+UUIExtensionPointWidget::UUIExtensionPointWidget(const FObjectInitializer& InObjectInitializer)
+	: Super(InObjectInitializer)
 {
 
 }

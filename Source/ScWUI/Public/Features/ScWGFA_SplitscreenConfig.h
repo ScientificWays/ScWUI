@@ -12,11 +12,8 @@ struct FGameFeatureDeactivatingContext;
 struct FGameFeatureStateChangeContext;
 struct FWorldContext;
 
-//////////////////////////////////////////////////////////////////////
-// UScWGFA_SplitscreenConfig
-
 /**
- * GameFeatureAction responsible for configuring Splitscreen.
+ *	Game Feature action that enables or disables splitscreen via a global voting system.
  */
 UCLASS(MinimalAPI, meta = (DisplayName = "Splitscreen Config"))
 class UScWGFA_SplitscreenConfig final : public UScWGFA_WorldActionBase
@@ -33,7 +30,7 @@ public:
 	//~ End UScWGFA_WorldActionBase interface
 
 public:
-	UPROPERTY(EditAnywhere, Category=Action)
+	UPROPERTY(EditAnywhere, Category = "Action")
 	bool bDisableSplitscreen = true;
 
 private:

@@ -8,6 +8,9 @@
 
 #include "ScWActivatableWidget.generated.h"
 
+/**
+ *	Gameplay message payload broadcast when an activatable widget is activated or deactivated.
+ */
 USTRUCT(BlueprintType)
 struct FGameplayMessage_Widget_Activatable
 {
@@ -17,7 +20,9 @@ struct FGameplayMessage_Widget_Activatable
 	TObjectPtr<class UScWActivatableWidget> Widget;
 };
 
-// An activatable widget that automatically drives the desired input config when activated
+/**
+ *	Activatable widget that drives input config, game pause, and gameplay message broadcasts on activation.
+ */
 UCLASS(MinimalAPI, Abstract, Blueprintable, meta = (DisplayName = "[ScW] Activatable Widget"))
 class UScWActivatableWidget : public UCommonActivatableWidget
 {

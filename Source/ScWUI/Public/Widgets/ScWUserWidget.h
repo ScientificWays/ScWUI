@@ -7,7 +7,7 @@
 #include "ScWUserWidget.generated.h"
 
 /**
- * 
+ *	Base user widget with animated removal support.
  */
 UCLASS(MinimalAPI, Abstract, Blueprintable, meta = (DisplayName = "[ScW] User Widget"))
 class UScWUserWidget : public UCommonUserWidget

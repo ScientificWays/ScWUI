@@ -132,28 +132,28 @@ void UScWGameLayer::ProcessControllerDevicesHavingChangedForDisconnectScreen()
 
 	// Get all input devices mapped to our player
 	const IPlatformInputDeviceMapper& DeviceMapper = IPlatformInputDeviceMapper::Get();
-    TArray<FInputDeviceId> MappedInputDevices;
-    const int32 NumDevicesMappedToUser = DeviceMapper.GetAllInputDevicesForUser(OwningLocalPlayerId, OUT MappedInputDevices);
+	TArray<FInputDeviceId> MappedInputDevices;
+	const int32 NumDevicesMappedToUser = DeviceMapper.GetAllInputDevicesForUser(OwningLocalPlayerId, OUT MappedInputDevices);
 
-    // Check if there are any other connected GAMEPAD devices mapped to this platform user. 
-    bool bHasConnectedController = false;
+	// Check if there are any other connected GAMEPAD devices mapped to this platform user.
+	bool bHasConnectedController = false;
 
-    for (const FInputDeviceId MappedDevice : MappedInputDevices)
-    {
-    	if (DeviceMapper.GetInputDeviceConnectionState(MappedDevice) == EInputDeviceConnectionState::Connected)
-    	{
-    		const FHardwareDeviceIdentifier HardwareInfo = UInputDeviceSubsystem::Get()->GetInputDeviceHardwareIdentifier(MappedDevice);
-    		if (HardwareInfo.PrimaryDeviceType == EHardwareDevicePrimaryType::Gamepad)
-    		{
-    			bHasConnectedController = true;
-    		}
-    	}			
-    }
-    // If there are no gamepad input devices mapped to this user, then we want to pop the toast saying to re-connect them
-    if (!bHasConnectedController)
-    {
-    	DisplayControllerDisconnectedMenu();
-    }
+	for (const FInputDeviceId MappedDevice : MappedInputDevices)
+	{
+		if (DeviceMapper.GetInputDeviceConnectionState(MappedDevice) == EInputDeviceConnectionState::Connected)
+		{
+			const FHardwareDeviceIdentifier HardwareInfo = UInputDeviceSubsystem::Get()->GetInputDeviceHardwareIdentifier(MappedDevice);
+			if (HardwareInfo.PrimaryDeviceType == EHardwareDevicePrimaryType::Gamepad)
+			{
+				bHasConnectedController = true;
+			}
+		}
+	}
+	// If there are no gamepad input devices mapped to this user, then we want to pop the toast saying to re-connect them
+	if (!bHasConnectedController)
+	{
+		DisplayControllerDisconnectedMenu();
+	}
 	// Otherwise we can hide the screen if it is currently being shown
 	else if (SpawnedControllerDisconnectedWidget)
 	{

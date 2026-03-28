@@ -12,40 +12,43 @@
 struct FWorldContext;
 struct FComponentRequestHandle;
 
+/**
+ *	Describes a widget layout to push onto a specific UI layer.
+ */
 USTRUCT()
 struct FScWGameLayerRequest
 {
 	GENERATED_BODY()
 
 	// The layout widget to spawn
-	UPROPERTY(EditAnywhere, Category=UI, meta = (AssetBundles="Client"))
+	UPROPERTY(EditAnywhere, Category = "UI", meta = (AssetBundles = "Client"))
 	TSoftClassPtr<UCommonActivatableWidget> LayoutClass;
 
 	// The layer to insert the widget in
-	UPROPERTY(EditAnywhere, Category=UI, meta = (Categories="UI.Layer"))
+	UPROPERTY(EditAnywhere, Category = "UI", meta = (Categories = "UI.Layer"))
 	FGameplayTag LayerTag;
 };
 
 
+/**
+ *	Maps a widget class to a UI extension point tag for HUD element registration.
+ */
 USTRUCT()
 struct FScWHUDElementEntry
 {
 	GENERATED_BODY()
 
 	// The widget to spawn
-	UPROPERTY(EditAnywhere, Category=UI, meta = (AssetBundles="Client"))
+	UPROPERTY(EditAnywhere, Category = "UI", meta = (AssetBundles = "Client"))
 	TSoftClassPtr<UUserWidget> WidgetClass;
 
 	// The slot ID where we should place this widget
-	UPROPERTY(EditAnywhere, Category = UI, meta = (Categories = "UI.Extension"))
+	UPROPERTY(EditAnywhere, Category = "UI", meta = (Categories = "UI.Extension"))
 	FGameplayTag ExtensionTag;
 };
 
-//////////////////////////////////////////////////////////////////////
-// UScWGFA_AddWidget
-
 /**
- * GameFeatureAction responsible for adding widgets.
+ *	Game Feature action that pushes layout widgets to UI layers and registers HUD elements at extension points.
  */
 UCLASS(MinimalAPI, meta = (DisplayName = "Add Widgets"))
 class UScWGFA_AddWidgets final : public UScWGFA_WorldActionBase
@@ -68,11 +71,11 @@ public:
 
 private:
 	// Layout to add to the HUD
-	UPROPERTY(EditAnywhere, Category=UI, meta = (TitleProperty="{LayerTag} -> {LayoutClass}"))
+	UPROPERTY(EditAnywhere, Category = "UI", meta = (TitleProperty = "{LayerTag} -> {LayoutClass}"))
 	TArray<FScWGameLayerRequest> Layout;
 
 	// Widgets to add to the HUD
-	UPROPERTY(EditAnywhere, Category=UI, meta = (TitleProperty="{ExtensionTag} -> {WidgetClass}"))
+	UPROPERTY(EditAnywhere, Category = "UI", meta = (TitleProperty = "{ExtensionTag} -> {WidgetClass}"))
 	TArray<FScWHUDElementEntry> Widgets;
 
 private:
