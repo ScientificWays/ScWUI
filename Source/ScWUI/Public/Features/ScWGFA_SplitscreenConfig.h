@@ -7,6 +7,8 @@
 
 #include "ScWGFA_SplitscreenConfig.generated.h"
 
+#define MODULE_API SCWUI_API
+
 class UObject;
 struct FGameFeatureDeactivatingContext;
 struct FGameFeatureStateChangeContext;
@@ -30,7 +32,7 @@ public:
 	//~ End UScWGFA_WorldActionBase interface
 
 public:
-	UPROPERTY(EditAnywhere, Category = "Action")
+	UPROPERTY(Category = "Action", EditAnywhere)
 	bool bDisableSplitscreen = true;
 
 private:
@@ -38,3 +40,5 @@ private:
 
 	static TMap<FObjectKey, int32> GlobalDisableVotes;
 };
+
+#undef MODULE_API

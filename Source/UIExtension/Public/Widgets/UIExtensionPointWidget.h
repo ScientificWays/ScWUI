@@ -45,20 +45,20 @@ private:
 
 protected:
 	/** The tag that defines this extension point */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "UI Extension", meta = (Categories = "UI.Layer"))
+	UPROPERTY(Category = "UI Extension", EditAnywhere, BlueprintReadOnly, meta = (Categories = "UI.Layer"))
 	FGameplayTag ExtensionPointTag;
 
 	/** How exactly does the extension need to match the extension point tag. */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "UI Extension")
+	UPROPERTY(Category = "UI Extension", EditAnywhere, BlueprintReadOnly)
 	EUIExtensionPointMatch ExtensionPointTagMatch = EUIExtensionPointMatch::ExactMatch;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "UI Extension")
+	UPROPERTY(Category = "UI Extension", EditAnywhere, BlueprintReadOnly)
 	TArray<TObjectPtr<UClass>> DataClasses;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="UI Extension", meta = ( IsBindableEvent="True" ))
+	UPROPERTY(Category = "UI Extension", EditAnywhere, BlueprintReadOnly, meta = ( IsBindableEvent="True" ))
 	FOnGetWidgetClassForData GetWidgetClassForData;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="UI Extension", meta = ( IsBindableEvent="True" ))
+	UPROPERTY(Category = "UI Extension", EditAnywhere, BlueprintReadOnly, meta = ( IsBindableEvent="True" ))
 	FOnConfigureWidgetForData ConfigureWidgetForData;
 
 	TArray<FUIExtensionPointHandle> ExtensionPointHandles;

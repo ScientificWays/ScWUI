@@ -71,11 +71,11 @@ protected:
 	MODULE_API void HideControllerDisconnectedMenu();
 
 	/** The widget class presented when all controllers are disconnected. */
-	UPROPERTY(EditDefaultsOnly, Category = "Controller Disconnect Menu")
+	UPROPERTY(Category = "Controller Disconnect Menu", EditDefaultsOnly)
 	TSubclassOf<UScWControllerDisconnectedWidget> ControllerDisconnectedScreen;
 
 	/** Platform tags required to show the "Controller Disconnected" screen. */
-	UPROPERTY(EditDefaultsOnly, Category = "Controller Disconnect Menu")
+	UPROPERTY(Category = "Controller Disconnect Menu", EditDefaultsOnly)
 	FGameplayTagContainer PlatformRequiresControllerDisconnectedWidget;
 
 	/** Pointer to the active "Controller Disconnected" menu if there is one. */

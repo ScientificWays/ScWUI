@@ -6,6 +6,8 @@
 
 #include "ScWUIFunctionLibrary.generated.h"
 
+#define MODULE_API SCWUI_API
+
 /**
  *	Static Blueprint function library for common ScW UI operations.
  */
@@ -14,3 +16,5 @@ class UScWUIFunctionLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
 };
+
+#undef MODULE_API

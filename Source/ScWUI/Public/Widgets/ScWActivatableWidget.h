@@ -8,6 +8,8 @@
 
 #include "ScWActivatableWidget.generated.h"
 
+#define MODULE_API SCWUI_API
+
 /**
  *	Gameplay message payload broadcast when an activatable widget is activated or deactivated.
  */
@@ -16,7 +18,7 @@ struct FGameplayMessage_Widget_Activatable
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(Category = "Widget", EditAnywhere, BlueprintReadWrite)
 	TObjectPtr<class UScWActivatableWidget> Widget;
 };
 
@@ -67,3 +69,5 @@ public:
 	bool bUnpauseOnRemovingAnimated;
 //~ End Game
 };
+
+#undef MODULE_API

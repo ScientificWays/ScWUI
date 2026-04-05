@@ -6,6 +6,8 @@
 
 #include "ScWUserWidget.generated.h"
 
+#define MODULE_API SCWUI_API
+
 /**
  *	Base user widget with animated removal support.
  */
@@ -22,3 +24,5 @@ public:
 	void BP_RemoveAnimated();
 //~ End Initialize
 };
+
+#undef MODULE_API

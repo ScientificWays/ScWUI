@@ -6,6 +6,8 @@
 
 #include "ScWSettingsListEntrySetting_KeyboardInput.generated.h"
 
+#define MODULE_API SCWUI_API
+
 class UKeyAlreadyBoundWarning;
 
 class UGameSetting;
@@ -78,3 +80,5 @@ private:
 	TObjectPtr<UScWButtonBase> Button_ResetToDefault;
 //~ End Bound Widgets
 };
+
+#undef MODULE_API

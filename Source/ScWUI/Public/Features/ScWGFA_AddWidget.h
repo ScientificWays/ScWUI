@@ -21,11 +21,11 @@ struct FScWGameLayerRequest
 	GENERATED_BODY()
 
 	// The layout widget to spawn
-	UPROPERTY(EditAnywhere, Category = "UI", meta = (AssetBundles = "Client"))
+	UPROPERTY(Category = "UI", EditAnywhere, meta = (AssetBundles = "Client"))
 	TSoftClassPtr<UCommonActivatableWidget> LayoutClass;
 
 	// The layer to insert the widget in
-	UPROPERTY(EditAnywhere, Category = "UI", meta = (Categories = "UI.Layer"))
+	UPROPERTY(Category = "UI", EditAnywhere, meta = (Categories = "UI.Layer"))
 	FGameplayTag LayerTag;
 };
 
@@ -39,11 +39,11 @@ struct FScWHUDElementEntry
 	GENERATED_BODY()
 
 	// The widget to spawn
-	UPROPERTY(EditAnywhere, Category = "UI", meta = (AssetBundles = "Client"))
+	UPROPERTY(Category = "UI", EditAnywhere, meta = (AssetBundles = "Client"))
 	TSoftClassPtr<UUserWidget> WidgetClass;
 
 	// The slot ID where we should place this widget
-	UPROPERTY(EditAnywhere, Category = "UI", meta = (Categories = "UI.Extension"))
+	UPROPERTY(Category = "UI", EditAnywhere, meta = (Categories = "UI.Extension"))
 	FGameplayTag ExtensionTag;
 };
 
@@ -71,11 +71,11 @@ public:
 
 private:
 	// Layout to add to the HUD
-	UPROPERTY(EditAnywhere, Category = "UI", meta = (TitleProperty = "{LayerTag} -> {LayoutClass}"))
+	UPROPERTY(Category = "UI", EditAnywhere, meta = (TitleProperty = "{LayerTag} -> {LayoutClass}"))
 	TArray<FScWGameLayerRequest> Layout;
 
 	// Widgets to add to the HUD
-	UPROPERTY(EditAnywhere, Category = "UI", meta = (TitleProperty = "{ExtensionTag} -> {WidgetClass}"))
+	UPROPERTY(Category = "UI", EditAnywhere, meta = (TitleProperty = "{ExtensionTag} -> {WidgetClass}"))
 	TArray<FScWHUDElementEntry> Widgets;
 
 private:

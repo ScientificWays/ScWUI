@@ -44,7 +44,7 @@ public:
 //~ Begin Overrides
 protected:
 
-	UPROPERTY(EditAnywhere, Category = "Restrictions")
+	UPROPERTY(Category = "Restrictions", EditAnywhere)
 	bool bCanCancel = true;
 
 	virtual void NativeOnActivated() override; // UCommonActivatableWidget

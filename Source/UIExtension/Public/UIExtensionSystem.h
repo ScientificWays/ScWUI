@@ -167,19 +167,19 @@ struct FUIExtensionRequest
 	GENERATED_BODY()
 
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(Category = "Extension", EditAnywhere, BlueprintReadOnly)
 	FUIExtensionHandle ExtensionHandle;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(Category = "Extension", EditAnywhere, BlueprintReadOnly)
 	FGameplayTag ExtensionPointTag;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(Category = "Extension", EditAnywhere, BlueprintReadOnly)
 	int32 Priority = INDEX_NONE;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(Category = "Extension", EditAnywhere, BlueprintReadOnly)
 	TObjectPtr<UObject> Data = nullptr;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(Category = "Extension", EditAnywhere, BlueprintReadOnly)
 	TObjectPtr<UObject> ContextObject = nullptr;
 };
 
@@ -201,10 +201,10 @@ public:
 	UE_API FUIExtensionHandle RegisterExtensionAsWidgetForContext(const FGameplayTag& ExtensionPointTag, UObject* ContextObject, TSubclassOf<UUserWidget> WidgetClass, int32 Priority);
 	UE_API FUIExtensionHandle RegisterExtensionAsData(const FGameplayTag& ExtensionPointTag, UObject* ContextObject, UObject* Data, int32 Priority);
 
-	UFUNCTION(BlueprintCallable, BlueprintCosmetic, Category = "UI Extension")
+	UFUNCTION(Category = "UI Extension", BlueprintCallable, BlueprintCosmetic)
 	UE_API void UnregisterExtension(const FUIExtensionHandle& ExtensionHandle);
 
-	UFUNCTION(BlueprintCallable, BlueprintCosmetic, Category = "UI Extension")
+	UFUNCTION(Category = "UI Extension", BlueprintCallable, BlueprintCosmetic)
 	UE_API void UnregisterExtensionPoint(const FUIExtensionPointHandle& ExtensionPointHandle);
 
 	static UE_API void AddReferencedObjects(UObject* InThis, FReferenceCollector& Collector);
@@ -216,7 +216,7 @@ protected:
 	UE_API void NotifyExtensionPointOfExtensions(TSharedPtr<FUIExtensionPoint>& ExtensionPoint);
 	UE_API void NotifyExtensionPointsOfExtension(EUIExtensionAction Action, TSharedPtr<FUIExtension>& Extension);
 
-	UFUNCTION(BlueprintCallable, BlueprintCosmetic, Category="UI Extension", meta = (DisplayName = "Register Extension Point"))
+	UFUNCTION(Category = "UI Extension", BlueprintCallable, BlueprintCosmetic, meta = (DisplayName = "Register Extension Point"))
 	UE_API FUIExtensionPointHandle K2_RegisterExtensionPoint(FGameplayTag ExtensionPointTag, EUIExtensionPointMatch ExtensionPointTagMatchType, const TArray<UClass*>& AllowedDataClasses, FExtendExtensionPointDynamicDelegate ExtensionCallback);
 	
 	UFUNCTION(BlueprintCallable, BlueprintCosmetic, Category = "UI Extension", meta = (DisplayName = "Register Extension (Widget)"))
@@ -232,13 +232,13 @@ protected:
 	/**
 	 * Registers the extension as data for any extension point that can make use of it.
 	 */
-	UFUNCTION(BlueprintCallable, BlueprintCosmetic, Category="UI Extension", meta = (DisplayName = "Register Extension (Data)"))
+	UFUNCTION(Category = "UI Extension", BlueprintCallable, BlueprintCosmetic, meta = (DisplayName = "Register Extension (Data)"))
 	UE_API FUIExtensionHandle K2_RegisterExtensionAsData(FGameplayTag ExtensionPointTag, UObject* Data, int32 Priority = -1);
 
 	/**
 	 * Registers the extension as data for any extension point that can make use of it.
 	 */
-	UFUNCTION(BlueprintCallable, BlueprintCosmetic, Category="UI Extension", meta = (DisplayName = "Register Extension (Data For Context)"))
+	UFUNCTION(Category = "UI Extension", BlueprintCallable, BlueprintCosmetic, meta = (DisplayName = "Register Extension (Data For Context)"))
 	UE_API FUIExtensionHandle K2_RegisterExtensionAsDataForContext(FGameplayTag ExtensionPointTag, UObject* ContextObject, UObject* Data, int32 Priority = -1);
 
 	UE_API FUIExtensionRequest CreateExtensionRequest(const TSharedPtr<FUIExtension>& Extension);
@@ -260,10 +260,10 @@ class UUIExtensionHandleFunctions : public UBlueprintFunctionLibrary
 public:
 	UUIExtensionHandleFunctions() { }
 
-	UFUNCTION(BlueprintCallable, BlueprintCosmetic, Category = "UI Extension")
+	UFUNCTION(Category = "UI Extension", BlueprintCallable, BlueprintCosmetic)
 	static UE_API void Unregister(UPARAM(ref) FUIExtensionHandle& Handle);
 
-	UFUNCTION(BlueprintCallable, BlueprintCosmetic, Category = "UI Extension")
+	UFUNCTION(Category = "UI Extension", BlueprintCallable, BlueprintCosmetic)
 	static UE_API bool IsValid(UPARAM(ref) FUIExtensionHandle& Handle);
 };
 
@@ -275,10 +275,10 @@ class UUIExtensionPointHandleFunctions : public UBlueprintFunctionLibrary
 public:
 	UUIExtensionPointHandleFunctions() { }
 
-	UFUNCTION(BlueprintCallable, BlueprintCosmetic, Category = "UI Extension")
+	UFUNCTION(Category = "UI Extension", BlueprintCallable, BlueprintCosmetic)
 	static UE_API void Unregister(UPARAM(ref) FUIExtensionPointHandle& Handle);
 
-	UFUNCTION(BlueprintCallable, BlueprintCosmetic, Category = "UI Extension")
+	UFUNCTION(Category = "UI Extension", BlueprintCallable, BlueprintCosmetic)
 	static UE_API bool IsValid(UPARAM(ref) FUIExtensionPointHandle& Handle);
 };
 
